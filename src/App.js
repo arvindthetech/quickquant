@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Card from './components/Card';
@@ -27,7 +27,7 @@ const App = () => {
   ];
 
   return (
-    <Router>
+    <BrowserRouter basename="/quickquant">
       <div className="d-flex flex-column min-vh-100">
         <Header />
         <main className="container flex-grow-1 py-4">
@@ -56,7 +56,7 @@ const App = () => {
         </main>
         <Footer />
       </div>
-    </Router>
+      </BrowserRouter>
   );
 };
 
