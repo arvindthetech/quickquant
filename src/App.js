@@ -16,14 +16,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const cards = [
-    { title: 'Tables', link: '/tables', icon: 'table_chart' },
-    { title: 'Squares', link: '/squares', icon: 'exposure' },
-    { title: 'Cubes', link: '/cubes', icon: 'view_in_ar' },
-    { title: 'Square Roots', link: '/square-roots', icon: 'functions' },
-    { title: 'Cube Roots', link: '/cube-roots', icon: 'calculate' },
-    { title: 'Addition', link: '/addition', icon: 'add' },
-    { title: 'Subtraction', link: '/subtraction', icon: 'remove' },
-    { title: 'Multiplication', link: '/multiplication', icon: 'close' },
+    { title: 'Tables', link: '/quickquant/tables', icon: 'table_chart' },
+    { title: 'Squares', link: '/quickquant/squares', icon: 'exposure' },
+    { title: 'Cubes', link: '/quickquant/cubes', icon: 'view_in_ar' },
+    { title: 'Square Roots', link: '/quickquant/square-roots', icon: 'functions' },
+    { title: 'Cube Roots', link: '/quickquant/cube-roots', icon: 'calculate' },
+    { title: 'Addition', link: '/quickquant/addition', icon: 'add' },
+    { title: 'Subtraction', link: '/quickquant/subtraction', icon: 'remove' },
+    { title: 'Multiplication', link: '/quickquant/multiplication', icon: 'close' },
   ];
 
   return (

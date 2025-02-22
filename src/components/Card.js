@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import { ClipLoader } from 'react-spinners';
 
 const Card = ({ title, link, icon }) => {
@@ -9,7 +10,6 @@ const Card = ({ title, link, icon }) => {
     // Simulate a delay (e.g., API call or navigation)
     setTimeout(() => {
       setLoading(false);
-      window.location.href = link; // Navigate to the link
     }, 1000); // 1-second delay
   };
 
@@ -23,17 +23,13 @@ const Card = ({ title, link, icon }) => {
             </span>
             <span style={{ verticalAlign: 'middle' }}>{title}</span>
           </div>
-          <button
-            className="btn btn-primary"
-            onClick={handleClick}
-            disabled={loading}
-          >
+          <Link to={link} className="btn btn-primary" onClick={handleClick}>
             {loading ? (
               <ClipLoader size={20} color="#ffffff" /> // Loading spinner
             ) : (
               'Go'
             )}
-          </button>
+          </Link>
         </div>
       </div>
     </div>
