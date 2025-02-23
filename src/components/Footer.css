@@ -1,0 +1,111 @@
+/* Footer.css */
+.footer {
+    background-color: #1E3A8A; /* Deep Blue */
+    color: #F3F4F6; /* Light Gray */
+    padding: 40px 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #F97316; /* Bright Orange */
+  }
+  
+  .footer-section p {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  .footer-section a {
+    color: #F3F4F6; /* Light Gray */
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    margin: 5px 0;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-section a:hover {
+    color: #F97316; /* Bright Orange */
+  }
+  
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .footer-logo img {
+    height: 40px;
+  }
+  
+  .footer-logo-text {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+  }
+  
+  .footer-social a {
+    color: #F3F4F6; /* Light Gray */
+    transition: color 0.3s ease;
+  }
+  
+  .footer-social a:hover {
+    color: #F97316; /* Bright Orange */
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #F3F4F6; /* Light Gray Divider */
+  }
+  
+  .footer-bottom p {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer-section {
+      min-width: 100%;
+    }
+  
+    .footer-logo {
+      justify-content: center;
+    }
+  
+    .footer-social {
+      justify-content: center;
+    }
+  }

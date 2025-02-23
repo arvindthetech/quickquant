@@ -1,3 +1,4 @@
+/* App.css */
 .App {
   text-align: center;
 }
@@ -37,9 +38,16 @@
   }
 }
 
-/*new things */
+/* New Styles with Unified Color Scheme */
+:root {
+  --primary-color: #1E3A8A; /* Deep Blue */
+  --accent-color: #F97316; /* Bright Orange */
+  --background-color: #F3F4F6; /* Light Gray */
+  --text-color: #1F2937; /* Dark Gray */
+  --button-hover-color: #FB923C; /* Lighter Orange */
+}
 
-/* App.css */
+/* Card Styles */
 .card {
   transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
   border: 1px solid #e0e0e0;
@@ -51,17 +59,18 @@
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #f8f9fa; /* Light gray background on hover */
+  background-color: var(--background-color); /* Light gray background on hover */
 }
 
 .card-title {
   font-size: 1.25rem;
   font-weight: 600;
+  color: var(--text-color); /* Dark Gray */
 }
 
 .card-text {
   font-size: 1rem;
-  color: #333;
+  color: var(--text-color); /* Dark Gray */
 }
 
 .card:active {
@@ -77,17 +86,19 @@
 
 .material-icons {
   font-size: 28px; /* Slightly larger icons */
-  color: #56C596; /* Bootstrap primary color */
+  color: var(--accent-color); /* Bright Orange */
   margin-right: 10px;
 }
 
+/* Button Styles */
 .btn-primary {
-  background-color: #007bff;
+  background-color: var(--primary-color); /* Deep Blue */
   border: none;
   padding: 8px 16px;
   border-radius: 5px;
   font-size: 14px;
   transition: background-color 0.2s;
+  color: white; /* White text for better contrast */
 }
 
 .btn-primary .material-icons {
@@ -96,7 +107,7 @@
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: var(--button-hover-color); /* Lighter Orange on hover */
 }
 
 /* Add a subtle animation for the Go button */
@@ -116,6 +127,7 @@
   animation: pulse 0.3s ease-in-out; /* Pulse animation on click */
 }
 
+/* Responsive Styles */
 @media (max-width: 768px) {
   .col-md-4 {
     flex: 0 0 100%;
