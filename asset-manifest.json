@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/quickquant/static/css/main.ff72eca7.css",
-    "main.js": "/quickquant/static/js/main.13893c1e.js",
+    "main.js": "/quickquant/static/js/main.8d787985.js",
     "static/js/453.93dfaea1.chunk.js": "/quickquant/static/js/453.93dfaea1.chunk.js",
     "index.html": "/quickquant/index.html",
     "main.ff72eca7.css.map": "/quickquant/static/css/main.ff72eca7.css.map",
-    "main.13893c1e.js.map": "/quickquant/static/js/main.13893c1e.js.map",
+    "main.8d787985.js.map": "/quickquant/static/js/main.8d787985.js.map",
     "453.93dfaea1.chunk.js.map": "/quickquant/static/js/453.93dfaea1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ff72eca7.css",
-    "static/js/main.13893c1e.js"
+    "static/js/main.8d787985.js"
   ]
 }
