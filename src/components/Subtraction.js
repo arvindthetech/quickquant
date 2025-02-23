@@ -256,12 +256,12 @@ const Subtraction = () => {
 
 const styles = {
   page: {
-    background: 'linear-gradient(135deg, #fce4ec, #f8bbd0)',
+    background: 'linear-gradient(90deg, #F3F4F6,rgb(248, 225, 207),rgb(255, 197, 150))',
     minHeight: '100vh',
     padding: '20px',
   },
   heading: {
-    color: '#880e4f',
+    color: '#1e3a8a',
     fontWeight: '700',
   },
   question: {

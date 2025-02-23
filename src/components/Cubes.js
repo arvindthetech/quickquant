@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners';
 
 const Cube = () => {
   const [activeTab, setActiveTab] = useState('learning'); // Tabs: 'learning' or 'practice'
@@ -99,22 +97,29 @@ const Cube = () => {
     setTimeLeft(Math.floor((Date.now() - startTime) / 1000)); // Calculate time taken in seconds
   };
 
+  // Change range during the quiz
+  const changeRange = () => {
+    setIsQuizActive(false);
+    setIsQuizEnded(false);
+    setQuizQuestions([]);
+  };
+
   return (
     <div className="cube-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}>Cubes</h2>
+        <h2 className="text-center mb-4" style={styles.heading}>🌟 Cubes 🌟</h2>
         <div className="text-center mb-4">
           <button
             className={`btn ${activeTab === 'learning' ? 'btn-primary' : 'btn-outline-primary'} me-2`}
             onClick={() => setActiveTab('learning')}
           >
-            Learning Part
+            📘 Learning Mode
           </button>
           <button
             className={`btn ${activeTab === 'practice' ? 'btn-primary' : 'btn-outline-primary'}`}
             onClick={() => setActiveTab('practice')}
           >
-            Practice Part
+            🎯 Practice Mode
           </button>
         </div>
 
@@ -155,8 +160,8 @@ const Cube = () => {
             <div className="row">
               {generateCubes().map((cube) => (
                 <div key={cube.number} className="col-md-4 mb-4">
-                  <div className="card h-100">
-                    <div className="card-body">
+                  <div className="card h-100 shadow">
+                    <div className="card-body text-center">
                       <h5 className="card-title">{cube.number}³ = {cube.cube}</h5>
                     </div>
                   </div>
@@ -182,12 +187,15 @@ const Cube = () => {
                     <option value="level2">Level 2 (1-20)</option>
                   </select>
                 </div>
-                <button className="btn btn-primary" onClick={startQuiz}>
-                  <span className="material-icons">play_arrow</span> Start Quiz
+                <button className="btn btn-success" onClick={startQuiz}>
+                  ▶️ Start Quiz
                 </button>
               </div>
             ) : isQuizActive ? (
               <div>
+                <div className="mb-3" style={styles.question}>
+                  Question {currentQuestionIndex + 1} of 10
+                </div>
                 <div className="mb-3" style={styles.question}>
                   {quizQuestions[currentQuestionIndex]?.question}
                 </div>
@@ -200,7 +208,7 @@ const Cube = () => {
                             ? option === quizQuestions[currentQuestionIndex].answer
                               ? 'btn-success'
                               : 'btn-danger'
-                            : 'btn-outline-primary'
+                            : 'btn-outline-secondary'
                         }`}
                         onClick={() => handleAnswerSelection(option)}
                         disabled={selectedOption !== null}
@@ -210,22 +218,28 @@ const Cube = () => {
                     </div>
                   ))}
                 </div>
-                <button className="btn btn-danger mt-3" onClick={endQuiz}>
-                  <span className="material-icons">stop</span> End Quiz
-                </button>
+                <div className="d-flex justify-content-center gap-3 mt-3">
+                  <button className="btn btn-danger d-flex align-items-center gap-2" onClick={endQuiz}>
+                    🚩 End Quiz
+                  </button>
+                  <button className="btn btn-secondary d-flex align-items-center gap-2" onClick={changeRange}>
+                    🔄 Change Range
+                  </button>
+                </div>
               </div>
             ) : (
               <div>
-                <h3>Quiz Ended!</h3>
-                <div className="mt-3" style={styles.score}>
-                  Time Taken: {timeLeft} seconds
+                <h3>🎉 Quiz Completed!</h3>
+                <div className="mt-3" style={styles.score}>⏱️ Time Taken: {timeLeft} seconds</div>
+                <div className="mt-3" style={styles.score}>✅ Correct: {score.correct} | ❌ Incorrect: {score.incorrect}</div>
+                <div className="d-flex justify-content-center gap-3 mt-3">
+                  <button className="btn btn-primary d-flex align-items-center gap-2" onClick={startQuiz}>
+                    🔄 Restart Quiz
+                  </button>
+                  <button className="btn btn-secondary d-flex align-items-center gap-2" onClick={changeRange}>
+                    🎛️ Change Range
+                  </button>
                 </div>
-                <div className="mt-3" style={styles.score}>
-                  Correct: {score.correct} | Incorrect: {score.incorrect}
-                </div>
-                <button className="btn btn-primary mt-3" onClick={startQuiz}>
-                  <span className="material-icons">replay</span> Restart Quiz
-                </button>
               </div>
             )}
           </div>
@@ -238,22 +252,22 @@ const Cube = () => {
 // Styles
 const styles = {
   page: {
-    background: 'linear-gradient(135deg, #f5f7fa, #c3cfe2)',
+    background: 'linear-gradient(90deg, #F3F4F6,rgb(248, 225, 207),rgb(255, 197, 150))',
     minHeight: '100vh',
     padding: '20px',
   },
   heading: {
-    color: '#333',
-    fontWeight: '600',
+    color: '#1e3a8a',
+    fontWeight: '700',
   },
   question: {
     fontSize: '24px',
-    color: '#333',
+    color: '#1F2937', // Dark Gray
     fontWeight: '600',
   },
   score: {
     fontSize: '18px',
-    color: '#333',
+    color: '#1F2937', // Dark Gray
   },
 };
 

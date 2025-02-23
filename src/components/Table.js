@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react';
 const Table = () => {
   const [activeTab, setActiveTab] = useState('learning'); // Tabs: 'learning' or 'practice'
   const [tablesRange, setTablesRange] = useState({ start: 1, end: 5 }); // For practice part
-  const [currentQuestion, setCurrentQuestion] = useState(null); // For practice part
-  const [userAnswer, setUserAnswer] = useState(''); // For practice part
-  const [feedback, setFeedback] = useState(''); // For practice part
-  const [score, setScore] = useState({ correct: 0, incorrect: 0 }); // For practice part
-  const [timeLeft, setTimeLeft] = useState(60); // For practice part
-  const [isQuizActive, setIsQuizActive] = useState(false); // For practice part
+  const [questions, setQuestions] = useState([]); // Store 10 questions
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Track current question
+  const [selectedOption, setSelectedOption] = useState(null); // User's selected option
+  const [score, setScore] = useState({ correct: 0, incorrect: 0 }); // Track score
+  const [timeLeft, setTimeLeft] = useState(0); // Time taken to solve the quiz
+  const [isQuizActive, setIsQuizActive] = useState(false); // Track if quiz is active
   const [isQuizEnded, setIsQuizEnded] = useState(false); // Track if quiz has ended
+  const [startTime, setStartTime] = useState(null); // Track quiz start time
 
   // Generate tables for the learning part
   const generateTables = () => {
@@ -24,74 +25,91 @@ const Table = () => {
     return tables;
   };
 
-  // Generate a random question for the practice part
-  const generateQuestion = () => {
+  // Generate 10 random questions for the practice part
+  const generateQuestions = () => {
     const { start, end } = tablesRange;
-    const num1 = Math.floor(Math.random() * (end - start + 1)) + start;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    setCurrentQuestion({ num1, num2, answer: num1 * num2 });
+    const questions = [];
+    for (let i = 0; i < 10; i++) {
+      const num1 = Math.floor(Math.random() * (end - start + 1)) + start;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      const answer = num1 * num2;
+      const options = generateOptions(answer);
+      questions.push({ num1, num2, answer, options });
+    }
+    return questions;
+  };
+
+  // Generate 4 options (1 correct, 3 incorrect)
+  const generateOptions = (correctAnswer) => {
+    const options = [correctAnswer];
+    while (options.length < 4) {
+      const randomOption = correctAnswer + (Math.floor(Math.random() * 10) - 5);
+      if (!options.includes(randomOption)) {
+        options.push(randomOption);
+      }
+    }
+    return options.sort(() => Math.random() - 0.5); // Shuffle options
   };
 
   // Start the quiz for the practice part
   const startQuiz = () => {
+    setQuestions(generateQuestions());
     setIsQuizActive(true);
     setIsQuizEnded(false);
     setScore({ correct: 0, incorrect: 0 });
-    setTimeLeft(60);
-    generateQuestion();
+    setCurrentQuestionIndex(0);
+    setStartTime(Date.now());
+    setTimeLeft(0);
   };
 
-  // Handle user's answer submission for the practice part
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (parseInt(userAnswer) === currentQuestion.answer) {
-      setFeedback('Correct! 🎉');
+  // Handle user's answer selection
+  const handleAnswerSelection = (option) => {
+    setSelectedOption(option);
+    if (option === questions[currentQuestionIndex].answer) {
       setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
     } else {
-      setFeedback(`Incorrect! The answer is ${currentQuestion.answer}.`);
       setScore((prev) => ({ ...prev, incorrect: prev.incorrect + 1 }));
     }
-    setUserAnswer('');
-    generateQuestion();
+    setTimeout(() => {
+      if (currentQuestionIndex < 9) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setSelectedOption(null);
+      } else {
+        endQuiz();
+      }
+    }, 800);
   };
 
-  // Timer logic for the practice part
-  useEffect(() => {
-    if (isQuizActive && timeLeft > 0) {
-      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (timeLeft === 0) {
-      setIsQuizActive(false);
-      setIsQuizEnded(true);
-      setFeedback('Time’s up! ⌛');
-    }
-  }, [isQuizActive, timeLeft]);
+  // End the quiz
+  const endQuiz = () => {
+    setIsQuizActive(false);
+    setIsQuizEnded(true);
+    setTimeLeft(Math.floor((Date.now() - startTime) / 1000));
+  };
+
+  // Change range during the quiz
+  const changeRange = () => {
+    setIsQuizActive(false);
+    setIsQuizEnded(false);
+    setQuestions([]);
+  };
 
   return (
-    <div
-      className="table-page"
-      style={{
-        background: isQuizActive
-          ? 'linear-gradient(135deg, #00f88c,rgb(111, 193, 237),rgb(92, 92, 240))' // Quiz mode background
-          : 'linear-gradient(135deg, #f5f7fa, #c3cfe2)', // Learning mode background
-        minHeight: '100vh',
-        padding: '20px',
-      }}
-    >
+    <div className="table-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4">Multiplication Tables</h2>
+        <h2 className="text-center mb-4" style={styles.heading}>🌟 Multiplication Tables 🌟</h2>
         <div className="text-center mb-4">
           <button
             className={`btn ${activeTab === 'learning' ? 'btn-primary' : 'btn-outline-primary'} me-2`}
             onClick={() => setActiveTab('learning')}
           >
-            Learning Part
+            📘 Learning Mode
           </button>
           <button
             className={`btn ${activeTab === 'practice' ? 'btn-primary' : 'btn-outline-primary'}`}
             onClick={() => setActiveTab('practice')}
           >
-            Practice Part
+            🎯 Practice Mode
           </button>
         </div>
 
@@ -132,8 +150,8 @@ const Table = () => {
             <div className="row">
               {generateTables().map((table) => (
                 <div key={table.number} className="col-md-4 mb-4">
-                  <div className="card h-100">
-                    <div className="card-body">
+                  <div className="card h-100 shadow">
+                    <div className="card-body text-center">
                       <h5 className="card-title">Table of {table.number}</h5>
                       <p className="card-text">{table.values.join(', ')}</p>
                     </div>
@@ -174,43 +192,59 @@ const Table = () => {
                     onChange={(e) => setTablesRange((prev) => ({ ...prev, end: parseInt(e.target.value) }))}
                   />
                 </div>
-                <button className="btn btn-primary" onClick={startQuiz}>
-                  <span className="material-icons">play_arrow</span> Start Quiz
+                <button className="btn btn-success" onClick={startQuiz}>
+                  ▶️ Start Quiz
                 </button>
               </div>
             ) : isQuizActive ? (
               <div>
-                <div className="mb-3" style={{ fontSize: '20px', color: '#d9534f', fontWeight: '600' }}>
-                  Time Left: {timeLeft} seconds
+                <div className="mb-3" style={styles.question}>
+                  Question {currentQuestionIndex + 1} of 10
                 </div>
-                <div className="mb-3" style={{ fontSize: '24px', color: '#333', fontWeight: '600' }}>
-                  What is {currentQuestion?.num1} × {currentQuestion?.num2}?
+                <div className="mb-3" style={styles.question}>
+                  What is {questions[currentQuestionIndex]?.num1} × {questions[currentQuestionIndex]?.num2}?
                 </div>
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="number"
-                    className="form-control mb-3"
-                    value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
-                    autoFocus
-                  />
-                  <button type="submit" className="btn btn-success">
-                    <span className="material-icons">check</span> Submit
+                <div className="row">
+                  {questions[currentQuestionIndex]?.options.map((option, index) => (
+                    <div key={index} className="col-md-6 mb-3">
+                      <button
+                        className={`btn w-100 ${
+                          selectedOption === option
+                            ? option === questions[currentQuestionIndex].answer
+                              ? 'btn-success'
+                              : 'btn-danger'
+                            : 'btn-outline-secondary'
+                        }`}
+                        onClick={() => handleAnswerSelection(option)}
+                        disabled={selectedOption !== null}
+                      >
+                        {option}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="d-flex justify-content-center gap-3 mt-3">
+                  <button className="btn btn-danger d-flex align-items-center gap-2" onClick={endQuiz}>
+                    🚩 End Quiz
                   </button>
-                </form>
-                <div className="mt-3" style={{ fontSize: '18px', color: '#5cb85c', fontWeight: '600' }}>
-                  {feedback}
+                  <button className="btn btn-secondary d-flex align-items-center gap-2" onClick={changeRange}>
+                    🔄 Change Range
+                  </button>
                 </div>
               </div>
             ) : (
               <div>
-                <h3>Quiz Ended!</h3>
-                <div className="mt-3" style={{ fontSize: '18px', color: '#333' }}>
-                  Correct: {score.correct} | Incorrect: {score.incorrect}
+                <h3>🎉 Quiz Completed!</h3>
+                <div className="mt-3" style={styles.score}>⏱️ Time Taken: {timeLeft} seconds</div>
+                <div className="mt-3" style={styles.score}>✅ Correct: {score.correct} | ❌ Incorrect: {score.incorrect}</div>
+                <div className="d-flex justify-content-center gap-3 mt-3">
+                  <button className="btn btn-primary d-flex align-items-center gap-2" onClick={startQuiz}>
+                    🔄 Restart Quiz
+                  </button>
+                  <button className="btn btn-secondary d-flex align-items-center gap-2" onClick={changeRange}>
+                    🎛️ Change Range
+                  </button>
                 </div>
-                <button className="btn btn-primary mt-3" onClick={startQuiz}>
-                  <span className="material-icons">replay</span> Restart Quiz
-                </button>
               </div>
             )}
           </div>
@@ -218,6 +252,28 @@ const Table = () => {
       </div>
     </div>
   );
+};
+
+// Styles
+const styles = {
+  page: {
+    background: 'linear-gradient(90deg, #F3F4F6,rgb(248, 225, 207),rgb(255, 197, 150))',
+    minHeight: '100vh',
+    padding: '20px',
+  },
+  heading: {
+    color: '#1e3a8a', 
+    fontWeight: '700',
+  },
+  question: {
+    fontSize: '24px',
+    color: '#1F2937', // Dark Gray
+    fontWeight: '600',
+  },
+  score: {
+    fontSize: '18px',
+    color: '#1F2937', // Dark Gray
+  },
 };
 
 export default Table;

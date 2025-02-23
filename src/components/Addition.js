@@ -231,12 +231,12 @@ const Addition = () => {
 
 const styles = {
   page: {
-    background: 'linear-gradient(135deg, #e0f7fa, #80deea)',
+    background: 'linear-gradient(90deg, #F3F4F6,rgb(248, 225, 207),rgb(255, 197, 150))',
     minHeight: '100vh',
     padding: '20px',
   },
   heading: {
-    color: '#006064',
+    color: '#1e3a8a',
     fontWeight: '700',
   },
   question: {
