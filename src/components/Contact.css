@@ -1,0 +1,21 @@
+/* Contact.css */
+.contact-page {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .social-links a:hover {
+    color: #F97316; /* Bright Orange on hover */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .contact-page {
+      padding: 10px;
+    }
+  
+    .social-links a {
+      margin: 0 8px;
+    }
+  }

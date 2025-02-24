@@ -12,6 +12,8 @@ import CubeRoots from './components/CubeRoots';
 import Addition from './components/Addition';
 import Subtraction from './components/Subtraction';
 import Multiplication from './components/Multiplication';
+import Contact from './components/Contact';
+import About from './components/About';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -52,6 +54,8 @@ const App = () => {
             <Route path="/addition" element={<Addition />} />
             <Route path="/subtraction" element={<Subtraction />} />
             <Route path="/multiplication" element={<Multiplication />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
         <Footer />
