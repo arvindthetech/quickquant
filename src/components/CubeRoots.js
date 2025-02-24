@@ -110,7 +110,7 @@ const CubeRoot = () => {
   return (
     <div className="cube-root-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}>🌟 Cube Root Explorer 🌟</h2>
+        <h2 className="text-center mb-4" style={styles.heading}> Cube Root Explorer </h2>
         <div className="text-center mb-4">
           <button
             className={`btn ${activeTab === 'learning' ? 'btn-primary' : 'btn-outline-primary'} me-2`}

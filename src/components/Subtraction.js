@@ -177,7 +177,7 @@ const Subtraction = () => {
   return (
     <div className="subtraction-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}>🌟 Subtraction Practice 🌟</h2>
+        <h2 className="text-center mb-4" style={styles.heading}> Subtraction Practice </h2>
         <div className="text-center">
           {!isQuizActive && !isQuizEnded ? (
             <div>

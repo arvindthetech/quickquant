@@ -1,12 +1,12 @@
 import React from 'react';
 import myphoto from '../assets/Arvind.jpg';
-import './About.css'; // Create this file for styling
+import './About.css';
 
 const About = () => {
   return (
     <div className="about-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}>🌟 About Us 🌟</h2>
+        <h2 className="text-center mb-4" style={styles.heading}> About Us </h2>
 
         {/* App Description */}
         <div className="mb-5">
@@ -15,9 +15,9 @@ const About = () => {
             QuickQuant is designed to help students improve their speed and accuracy while solving quantitative math and reasoning problems. Here’s how we do it:
           </p>
           <ul style={styles.list}>
-            <li>🚀 <strong>Speed Enhancement:</strong> Practice with timed quizzes to improve your problem-solving speed.</li>
-            <li>🧠 <strong>Concept Mastery:</strong> Learn and master key concepts with interactive learning modules.</li>
-            <li>📊 <strong>Performance Tracking:</strong> Get detailed feedback and track your progress over time.</li>
+            <li> <strong>Speed Enhancement:</strong> Practice with timed quizzes to improve your problem-solving speed.</li>
+            <li> <strong>Concept Mastery:</strong> Learn and master key concepts with interactive learning modules.</li>
+            <li> <strong>Performance Tracking:</strong> Get detailed feedback and track your progress over time.</li>
           </ul>
         </div>
 
@@ -37,11 +37,11 @@ const About = () => {
             We’re constantly working to make QuickQuant even better. Here are some exciting features we’re planning to add:
           </p>
           <ul style={styles.list}>
-            <li>🧩 <strong>Reasoning and Quantitative Question-Solving:</strong> Chapter-wise practice with new methodologies.</li>
-            <li>📚 <strong>PYQs (Previous Year Questions):</strong> Practice with real exam questions.</li>
-            <li>💡 <strong>Tricks and Tips:</strong> Learn shortcuts and strategies to solve problems faster.</li>
-            <li>📝 <strong>Formula Sheets:</strong> Quick reference guides for key concepts.</li>
-            <li>🤖 <strong>Interactive Learning:</strong> AI-powered personalized learning experiences.</li>
+            <li> <strong>Reasoning and Quantitative Question-Solving:</strong> Chapter-wise practice with new methodologies.</li>
+            <li> <strong>PYQs (Previous Year Questions):</strong> Practice with real exam questions.</li>
+            <li> <strong>Tricks and Tips:</strong> Learn shortcuts and strategies to solve problems faster.</li>
+            <li> <strong>Formula Sheets:</strong> Quick reference guides for key concepts.</li>
+            <li> <strong>Interactive Learning:</strong> AI-powered personalized learning experiences.</li>
           </ul>
         </div>
 
@@ -50,15 +50,10 @@ const About = () => {
           <h3 style={styles.subHeading}>Meet the Developer</h3>
           <div className="developer-intro">
             <img src={myphoto} alt="Arvind Kumar Patel" style={styles.photo}/>
-            {/*<img
-              src="/assets/Arvind.jpg" // Replace with your photo path
-              alt="Arvind Kumar Patel"
-              style={styles.photo}
-            />*/}
             <h4 style={styles.name}>Arvind Kumar Patel</h4>
             <p style={styles.role}>Developer and Learner</p>
             <p style={styles.bio}>
-              I am passionate developer with a strong interest in creating educational tools that make learning fun and effective. With a background in computer science and a love for teaching, he aims to bridge the gap between technology and education.
+              I am passionate developer with a strong interest in creating educational tools that make learning fun and effective. With a background in computer science and a love for teaching,my aims to bridge the gap between technology and education.
             </p>
           </div>
         </div>

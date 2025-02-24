@@ -1,24 +1,49 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {NavLink, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo1.png';
-import './Header.css'; // Import the scoped CSS file
+import './Header.css';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // For mobile menu
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // For topics dropdown
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate(); // Hook for navigation
+
+  const topics = [
+    { title: 'Tables', link: '/tables' },
+    { title: 'Squares', link: '/squares' },
+    { title: 'Cubes', link: '/cubes' },
+    { title: 'Square Roots', link: '/square-roots' },
+    { title: 'Cube Roots', link: '/cube-roots' },
+    { title: 'Addition', link: '/addition' },
+    { title: 'Subtraction', link: '/subtraction' },
+    { title: 'Multiplication', link: '/multiplication' },
+  ];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
+  const handleTopicClick = (link) => {
+    navigate(link); // Navigate to the selected topic
+    closeDropdown();
+    closeMenu();
+  };
+
   return (
     <header className="header">
       <div className="header-container">
-        {/* Left Side: Logo, App Name, and Tagline */}
         <div className="header-brand">
           <img src={logo} alt="App Logo" className="header-logo" />
           <div>
@@ -27,56 +52,71 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Right Side: Navigation Menu and Login/Signup */}
         <nav className={`header-nav-menu ${isMenuOpen ? 'open' : ''}`}>
           <ul className="header-nav-list">
             <li className="header-nav-item">
-              <Link to="/" className="header-nav-link">Home</Link>
+              <NavLink
+                to="/"
+                className={({ isActive }) => isActive ? 'header-nav-link active' : 'header-nav-link'}
+                onClick={closeMenu}
+              >
+                Home
+              </NavLink>
             </li>
-            <li className="header-nav-item" onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
-              <span className="header-nav-link">Topics</span>
-              <ul className="header-dropdown-menu" style={{ display: isDropdownOpen ? 'block' : 'none' }}>
-                <li className="header-dropdown-item">
-                  <Link to="/tables" className="header-dropdown-link">Tables</Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/squares" className="header-dropdown-link">Squares</Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/cubes" className="header-dropdown-link">Cubes</Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/square-roots" className="header-dropdown-link">Square Roots</Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/cube-roots" className="header-dropdown-link">Cube Roots</Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/addition" className="header-dropdown-link">Addition</Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/subtraction" className="header-dropdown-link">Subtraction</Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/multiplication" className="header-dropdown-link">Multiplication</Link>
-                </li>
+            <li
+              className="header-nav-item"
+              onMouseEnter={toggleDropdown}
+              onMouseLeave={closeDropdown}
+            >
+              <span
+                className="header-nav-link"
+                tabIndex="0"
+                aria-haspopup="true"
+                aria-expanded={isDropdownOpen}
+              >
+                Topics
+              </span>
+              <ul
+                className="header-dropdown-menu"
+                style={{ display: isDropdownOpen ? 'block' : 'none' }}
+              >
+                {topics.map((topic, index) => (
+                  <li key={index} className="header-dropdown-item">
+                    <button
+                      className="header-dropdown-link"
+                      onClick={() => handleTopicClick(topic.link)}
+                    >
+                      {topic.title}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </li>
             <li className="header-nav-item">
-              <Link to="/about" className="header-nav-link">About</Link>
+              <NavLink
+                to="/about"
+                className={({ isActive }) => isActive ? 'header-nav-link active' : 'header-nav-link'}
+                onClick={closeMenu}
+              >
+                About
+              </NavLink>
             </li>
             <li className="header-nav-item">
-              <Link to="/contact" className="header-nav-link">Contact</Link>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) => isActive ? 'header-nav-link active' : 'header-nav-link'}
+                onClick={closeMenu}
+              >
+                Contact
+              </NavLink>
             </li>
           </ul>
-          {/* Login/Signup Button inside the hamburger menu */}
           <button className="header-auth-button">
             Login/Signup
           </button>
         </nav>
 
-        {/* Hamburger Menu for Mobile */}
-        <button className="header-hamburger" onClick={toggleMenu}>
+        <button className="header-hamburger" onClick={toggleMenu} aria-label="Toggle menu">
           ☰
         </button>
       </div>

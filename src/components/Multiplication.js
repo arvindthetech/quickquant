@@ -135,7 +135,7 @@ const Multiplication = () => {
   return (
     <div className="multiplication-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}>🌟 Multiplication Practice 🌟</h2>
+        <h2 className="text-center mb-4" style={styles.heading}> Multiplication Practice </h2>
         <div className="text-center">
           {!isQuizActive && !isQuizEnded ? (
             <div>

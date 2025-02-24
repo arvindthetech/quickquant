@@ -33,12 +33,12 @@ const Contact = () => {
   return (
     <div className="contact-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}>🌟 Contact Us 🌟</h2>
+        <h2 className="text-center mb-4" style={styles.heading}> Contact Us </h2>
         <div className="text-center mb-4" style={styles.message}>
           <p>
             Hello, amazing learners! We’re thrilled that you’re using QuickQuant to master your skills. 
             Whether you have feedback, questions, or suggestions to improve the app, we’d love to hear from you. 
-            Your input helps us make QuickQuant even better for everyone. Feel free to reach out—we’re here to help! 🚀
+            Your input helps us make QuickQuant even better for everyone. Feel free to reach out—we’re here to help!
           </p>
         </div>
 
@@ -106,7 +106,7 @@ const Contact = () => {
                 />
               </div>
               <button type="submit" className="btn btn-primary w-100">
-                📩 Send Message
+                 Send Message
               </button>
             </form>
           </div>
@@ -114,21 +114,21 @@ const Contact = () => {
 
         {/* Contact Information */}
         <div className="text-center mt-5">
-          <h3 style={styles.subHeading}>📧 Contact Information</h3>
+          <h3 style={styles.subHeading}> Contact Information</h3>
           <p style={styles.contactInfo}>
             <Mail size={20} className="me-2" /> support@quickquant.com
           </p>
           <div className="social-links mt-3">
-            <a href="https://facebook.com" aria-label="Facebook" style={styles.socialLink}>
+            <a href="https://www.facebook.com/arvindthetech" aria-label="Facebook" style={styles.socialLink}>
               <Facebook size={24} />
             </a>
-            <a href="https://twitter.com" aria-label="Twitter" style={styles.socialLink}>
+            <a href="https://twitter.com/arvindthetech" aria-label="Twitter" style={styles.socialLink}>
               <Twitter size={24} />
             </a>
-            <a href="https://instagram.com" aria-label="Instagram" style={styles.socialLink}>
+            <a href="https://www.instagram.com/arvindthetech/" aria-label="Instagram" style={styles.socialLink}>
               <Instagram size={24} />
             </a>
-            <a href="https://linkedin.com" aria-label="LinkedIn" style={styles.socialLink}>
+            <a href="https://www.linkedin.com/in/arvindthetech/" aria-label="LinkedIn" style={styles.socialLink}>
               <Linkedin size={24} />
             </a>
           </div>

@@ -97,7 +97,7 @@ const Table = () => {
   return (
     <div className="table-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}>🌟 Multiplication Tables 🌟</h2>
+        <h2 className="text-center mb-4" style={styles.heading}> Tables Explorer </h2>
         <div className="text-center mb-4">
           <button
             className={`btn ${activeTab === 'learning' ? 'btn-primary' : 'btn-outline-primary'} me-2`}

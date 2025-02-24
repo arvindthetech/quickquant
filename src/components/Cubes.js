@@ -107,7 +107,7 @@ const Cube = () => {
   return (
     <div className="cube-page" style={styles.page}>
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}>🌟 Cubes 🌟</h2>
+        <h2 className="text-center mb-4" style={styles.heading}> Cubes Explorer </h2>
         <div className="text-center mb-4">
           <button
             className={`btn ${activeTab === 'learning' ? 'btn-primary' : 'btn-outline-primary'} me-2`}

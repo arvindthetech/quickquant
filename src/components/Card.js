@@ -23,7 +23,12 @@ const Card = ({ title, link, icon }) => {
             </span>
             <span style={{ verticalAlign: 'middle' }}>{title}</span>
           </div>
-          <Link to={link} className="btn btn-primary" onClick={handleClick}>
+          <Link
+            to={link}
+            className="btn"
+            style={{ backgroundColor: 'var(--primary-color)', color: '#ffffff' }}
+            onClick={handleClick}
+          >
             {loading ? (
               <ClipLoader size={20} color="#ffffff" /> // Loading spinner
             ) : (
