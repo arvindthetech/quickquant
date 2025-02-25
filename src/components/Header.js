@@ -111,9 +111,17 @@ const Header = () => {
               </NavLink>
             </li>
           </ul>
-          <button className="header-auth-button">
+          <button
+            className="header-auth-button"
+            onClick={() => {
+              navigate('/auth');
+              closeMenu(); // Close menu after navigating
+            }}
+          >
             Login/Signup
           </button>
+
+
         </nav>
 
         <button className="header-hamburger" onClick={toggleMenu} aria-label="Toggle menu">

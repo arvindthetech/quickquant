@@ -1,0 +1,92 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f4f6;
+  }
+  
+  .auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .auth-box h2 {
+    margin-bottom: 15px;
+    color: #1e3a8a;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .auth-button {
+    background-color: #f97316;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .auth-button:hover {
+    background-color: #fb923c;
+  }
+  
+  .auth-toggle-text {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .toggle-button {
+    background: none;
+    border: none;
+    color: #1e3a8a;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .toggle-button:hover {
+    text-decoration: underline;
+  }
+  
+  .back-button {
+    margin-top: 10px;
+    background-color: #1e3a8a;
+    color: white;
+    padding: 8px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .back-button:hover {
+    background-color: #334c9e;
+  }
+  

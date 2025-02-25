@@ -14,6 +14,8 @@ import Subtraction from './components/Subtraction';
 import Multiplication from './components/Multiplication';
 import Contact from './components/Contact';
 import About from './components/About';
+import Auth from './components/Auth';
+import 'animate.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -46,6 +48,7 @@ const App = () => {
               }
             />
             {/* Other Pages */}
+            <Route path="/auth" element={<Auth />} />
             <Route path="/tables" element={<Table />} />
             <Route path="/squares" element={<Squares />} />
             <Route path="/cubes" element={<Cubes />} />
