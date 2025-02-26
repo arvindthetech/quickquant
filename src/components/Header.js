@@ -1,23 +1,11 @@
-import React, { useState } from 'react';
-import {NavLink, useNavigate } from 'react-router-dom';
-import logo from '../assets/logo1.png';
-import './Header.css';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import logo from "../assets/logo1.png";
+import "./Header.css";
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const navigate = useNavigate(); // Hook for navigation
-
-  const topics = [
-    { title: 'Tables', link: '/tables' },
-    { title: 'Squares', link: '/squares' },
-    { title: 'Cubes', link: '/cubes' },
-    { title: 'Square Roots', link: '/square-roots' },
-    { title: 'Cube Roots', link: '/cube-roots' },
-    { title: 'Addition', link: '/addition' },
-    { title: 'Subtraction', link: '/subtraction' },
-    { title: 'Multiplication', link: '/multiplication' },
-  ];
+const Header = ({ user, onLogout }) => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -35,12 +23,6 @@ const Header = () => {
     setIsDropdownOpen(false);
   };
 
-  const handleTopicClick = (link) => {
-    navigate(link); // Navigate to the selected topic
-    closeDropdown();
-    closeMenu();
-  };
-
   return (
     <header className="header">
       <div className="header-container">
@@ -52,16 +34,17 @@ const Header = () => {
           </div>
         </div>
 
-        <nav className={`header-nav-menu ${isMenuOpen ? 'open' : ''}`}>
+        <nav className={`header-nav-menu ${isMenuOpen ? "open" : ""}`}>
           <ul className="header-nav-list">
             <li className="header-nav-item">
-              <NavLink
-                to="/"
-                className={({ isActive }) => isActive ? 'header-nav-link active' : 'header-nav-link'}
-                onClick={closeMenu}
-              >
-                Home
-              </NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "header-nav-link active" : "header-nav-link")}
+              end
+              onClick={closeMenu}
+            >
+              Home
+            </NavLink>
             </li>
             <li
               className="header-nav-item"
@@ -78,50 +61,74 @@ const Header = () => {
               </span>
               <ul
                 className="header-dropdown-menu"
-                style={{ display: isDropdownOpen ? 'block' : 'none' }}
+                style={{ display: isDropdownOpen ? "block" : "none" }}
               >
-                {topics.map((topic, index) => (
-                  <li key={index} className="header-dropdown-item">
-                    <button
-                      className="header-dropdown-link"
-                      onClick={() => handleTopicClick(topic.link)}
-                    >
-                      {topic.title}
-                    </button>
-                  </li>
-                ))}
+                <li className="header-dropdown-item">
+                  <Link to="/tables" className="header-dropdown-link" onClick={closeMenu}>
+                    Tables
+                  </Link>
+                </li>
+                <li className="header-dropdown-item">
+                  <Link to="/squares" className="header-dropdown-link" onClick={closeMenu}>
+                    Squares
+                  </Link>
+                </li>
+                <li className="header-dropdown-item">
+                  <Link to="/cubes" className="header-dropdown-link" onClick={closeMenu}>
+                    Cubes
+                  </Link>
+                </li>
+                <li className="header-dropdown-item">
+                  <Link to="/square-roots" className="header-dropdown-link" onClick={closeMenu}>
+                    Square Roots
+                  </Link>
+                </li>
+                <li className="header-dropdown-item">
+                  <Link to="/cube-roots" className="header-dropdown-link" onClick={closeMenu}>
+                    Cube Roots
+                  </Link>
+                </li>
+                <li className="header-dropdown-item">
+                  <Link to="/addition" className="header-dropdown-link" onClick={closeMenu}>
+                    Addition
+                  </Link>
+                </li>
+                <li className="header-dropdown-item">
+                  <Link to="/subtraction" className="header-dropdown-link" onClick={closeMenu}>
+                    Subtraction
+                  </Link>
+                </li>
+                <li className="header-dropdown-item">
+                  <Link to="/multiplication" className="header-dropdown-link" onClick={closeMenu}>
+                    Multiplication
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className="header-nav-item">
-              <NavLink
-                to="/about"
-                className={({ isActive }) => isActive ? 'header-nav-link active' : 'header-nav-link'}
-                onClick={closeMenu}
-              >
+              <NavLink to="/about" className="header-nav-link" activeClassName="active" exact onClick={closeMenu}>
                 About
               </NavLink>
             </li>
             <li className="header-nav-item">
-              <NavLink
-                to="/contact"
-                className={({ isActive }) => isActive ? 'header-nav-link active' : 'header-nav-link'}
-                onClick={closeMenu}
-              >
+              <NavLink to="/contact" className="header-nav-link" activeClassName="active" exact onClick={closeMenu}>
                 Contact
               </NavLink>
             </li>
           </ul>
-          <button
-            className="header-auth-button"
-            onClick={() => {
-              navigate('/auth');
-              closeMenu(); // Close menu after navigating
-            }}
-          >
-            Login/Signup
-          </button>
-
-
+          {/* Display user name and logout button if logged in */}
+          {user ? (
+            <div className="header-user">
+              <span className="header-username">{user.name}</span>
+              <button className="header-auth-button" onClick={onLogout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/auth" className="header-auth-button">
+              Login/Signup
+            </Link>
+          )}
         </nav>
 
         <button className="header-hamburger" onClick={toggleMenu} aria-label="Toggle menu">
