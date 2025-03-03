@@ -1,0 +1,258 @@
+/* Profile Section */
+.profile-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Header */
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name {
+  margin: 10px 0 5px;
+  font-size: 24px;
+  color: #1f2937;
+}
+
+.profile-username {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* Profile Info */
+.profile-info {
+  margin-bottom: 20px;
+}
+
+.profile-field {
+  margin-bottom: 15px;
+}
+
+.profile-field strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #1f2937;
+}
+
+.profile-field span {
+  cursor: pointer;
+  color: #374151;
+}
+
+/* Preferences */
+.profile-preferences {
+  margin-bottom: 20px;
+}
+
+.profile-preference {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.profile-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #f97316;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Edit Profile and Logout Buttons */
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.profile-edit-button,
+.profile-logout {
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.profile-edit-button {
+  background-color: #f97316;
+  color: #fff;
+}
+
+.profile-edit-button:hover {
+  background-color: #fb923c;
+}
+
+.profile-logout {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.profile-logout:hover {
+  background-color: #ef4444;
+}
+
+/* Edit Profile Modal */
+.profile-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.profile-modal-field {
+  margin-bottom: 15px;
+}
+
+.profile-modal-field label {
+  display: block;
+  margin-bottom: 5px;
+  color: #1f2937;
+}
+
+.profile-modal-field input,
+.profile-modal-field textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+}
+
+.profile-icon-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.profile-icon-option {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.profile-icon-option:hover {
+  opacity: 0.8;
+}
+
+.profile-icon-option.selected {
+  border-color: #f97316;
+}
+
+.profile-save-button,
+.profile-cancel-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.profile-save-button {
+  background-color: #f97316;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.profile-save-button:hover {
+  background-color: #fb923c;
+}
+
+.profile-cancel-button {
+  background-color: #d1d5db;
+  color: #1f2937;
+}
+
+.profile-cancel-button:hover {
+  background-color: #9ca3af;
+}
+
+/* Header Profile Icon */
+.header-profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.header-profile-icon:hover {
+  opacity: 0.8;
+}

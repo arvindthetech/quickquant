@@ -16,39 +16,17 @@ import Multiplication from "./components/Multiplication";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Auth from "./components/Auth";
+import Profile from "./components/Profile"; // ✅ Added Profile Component
 import "animate.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
-  const [user, setUser] = useState(null); // State to store user details
+  const [user, setUser] = useState(null);
 
-  // Fetch user details on component mount
   useEffect(() => {
-    const fetchUser = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const response = await axios.get("https://quickquant-backend.onrender.com/api/auth/me", {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          setUser(response.data); // Set user details
-        } catch (err) {
-          console.error("Failed to fetch user details", err);
-          localStorage.removeItem("token"); // Remove invalid token
-        }
-      }
-    };
-
-    fetchUser();
+    fetchUserDetails();
   }, []);
 
-  // Handle login/signup success
-  const handleAuthSuccess = (token) => {
-    localStorage.setItem("token", token); // Save token to localStorage
-    fetchUserDetails(); // Fetch user details
-  };
-
-  // Fetch user details after login/signup
   const fetchUserDetails = async () => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -56,17 +34,22 @@ const App = () => {
         const response = await axios.get("https://quickquant-backend.onrender.com/api/auth/me", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(response.data); // Set user details
+        setUser(response.data);
       } catch (err) {
         console.error("Failed to fetch user details", err);
+        localStorage.removeItem("token");
       }
     }
   };
 
-  // Handle logout
+  const handleAuthSuccess = (token) => {
+    localStorage.setItem("token", token);
+    fetchUserDetails();
+  };
+
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove token
-    setUser(null); // Clear user state
+    localStorage.removeItem("token");
+    setUser(null);
   };
 
   const cards = [
@@ -83,11 +66,9 @@ const App = () => {
   return (
     <BrowserRouter basename="/quickquant">
       <div className="d-flex flex-column min-vh-100">
-        {/* Pass user and logout handler to Header */}
-        <Header user={user} onLogout={handleLogout} />
+        <Header user={user} />
         <main className="container flex-grow-1 py-4">
           <Routes>
-            {/* Home Page with Cards */}
             <Route
               path="/"
               element={
@@ -98,12 +79,7 @@ const App = () => {
                 </div>
               }
             />
-            {/* Auth Page */}
-            <Route
-              path="/auth"
-              element={<Auth onAuthSuccess={handleAuthSuccess} />}
-            />
-            {/* Other Pages */}
+            <Route path="/auth" element={<Auth onAuthSuccess={handleAuthSuccess} />} />
             <Route path="/tables" element={<Table />} />
             <Route path="/squares" element={<Squares />} />
             <Route path="/cubes" element={<Cubes />} />
@@ -114,6 +90,7 @@ const App = () => {
             <Route path="/multiplication" element={<Multiplication />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/profile" element={<Profile user={user} onLogout={handleLogout} />} /> {/* ✅ Profile Page */}
           </Routes>
         </main>
         <Footer />
@@ -123,3 +100,4 @@ const App = () => {
 };
 
 export default App;
+

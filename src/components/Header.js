@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo1.png";
 import "./Header.css";
@@ -116,7 +116,8 @@ const Header = ({ user, onLogout }) => {
               </NavLink>
             </li>
           </ul>
-          {/* Display user name and logout button if logged in */}
+
+          //Display user name and logout button if logged in 
           {user ? (
             <div className="header-user">
               <span className="header-username">{user.name}</span>
@@ -131,6 +132,100 @@ const Header = ({ user, onLogout }) => {
           )}
         </nav>
 
+        <button className="header-hamburger" onClick={toggleMenu} aria-label="Toggle menu">
+          ☰
+        </button>
+      </div>
+    </header>
+  );
+};
+
+export default Header; */
+
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import logo from "../assets/logo1.png";
+import male1 from "../assets/avatar/male1.png"; // Import default avatar
+import "./Header.css";
+
+const Header = ({ user }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Toggle menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Toggle dropdown
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
+  return (
+    <header className="header">
+      <div className="header-container">
+        <div className="header-brand">
+          <img src={logo} alt="App Logo" className="header-logo" />
+          <div>
+            <h1 className="header-app-name">QuickQuant</h1>
+            <p className="header-tagline">Solve Fast. Score Big.</p>
+          </div>
+        </div>
+
+        <nav className={`header-nav-menu ${isMenuOpen ? "open" : ""}`}>
+          <ul className="header-nav-list">
+            <li className="header-nav-item">
+              <NavLink to="/" className={({ isActive }) => (isActive ? "header-nav-link active" : "header-nav-link")} end onClick={closeMenu}>
+                Home
+              </NavLink>
+            </li>
+            <li className="header-nav-item" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
+              <span className="header-nav-link" tabIndex="0" aria-haspopup="true" aria-expanded={isDropdownOpen}>
+                Topics
+              </span>
+              <ul className="header-dropdown-menu" style={{ display: isDropdownOpen ? "block" : "none" }}>
+                <li className="header-dropdown-item"><Link to="/tables" className="header-dropdown-link" onClick={closeMenu}>Tables</Link></li>
+                <li className="header-dropdown-item"><Link to="/squares" className="header-dropdown-link" onClick={closeMenu}>Squares</Link></li>
+                <li className="header-dropdown-item"><Link to="/cubes" className="header-dropdown-link" onClick={closeMenu}>Cubes</Link></li>
+                <li className="header-dropdown-item"><Link to="/square-roots" className="header-dropdown-link" onClick={closeMenu}>Square Roots</Link></li>
+                <li className="header-dropdown-item"><Link to="/cube-roots" className="header-dropdown-link" onClick={closeMenu}>Cube Roots</Link></li>
+                <li className="header-dropdown-item"><Link to="/addition" className="header-dropdown-link" onClick={closeMenu}>Addition</Link></li>
+                <li className="header-dropdown-item"><Link to="/subtraction" className="header-dropdown-link" onClick={closeMenu}>Subtraction</Link></li>
+                <li className="header-dropdown-item"><Link to="/multiplication" className="header-dropdown-link" onClick={closeMenu}>Multiplication</Link></li>
+              </ul>
+            </li>
+            <li className="header-nav-item"><NavLink to="/about" className="header-nav-link" exact onClick={closeMenu}>About</NavLink></li>
+            <li className="header-nav-item"><NavLink to="/contact" className="header-nav-link" exact onClick={closeMenu}>Contact</NavLink></li>
+          </ul>
+
+          {/* User Profile Section */}
+          <div className="header-user-section header-nav-item">
+            {user ? (
+              <Link to="/profile" className="header-profile-link" onClick={closeMenu}>
+                <img
+                  src={user.icon || male1} // Use the imported icon directly
+                  alt="Profile Icon"
+                  className="header-profile-icon"
+                />
+              </Link>
+            ) : (
+              <Link to="/auth" className="header-auth-button" onClick={closeMenu}>
+                Login/Signup
+              </Link>
+            )}
+          </div>
+        </nav>
+
+        {/* Hamburger Menu */}
         <button className="header-hamburger" onClick={toggleMenu} aria-label="Toggle menu">
           ☰
         </button>
