@@ -1,6 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Quick Quant",
+  "name": "Solve Fast. Score Big.",
+  "description": "Quick Quant is a platform to help you prepare for SSC/banking/Railways exams. It provides a set of questions to solve and track your progress.",
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
       "src": "favicon.ico",
