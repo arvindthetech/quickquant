@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners';
+import React, { useState} from 'react';
 
 const CubeRoot = () => {
   const [activeTab, setActiveTab] = useState('learning');

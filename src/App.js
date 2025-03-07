@@ -16,7 +16,7 @@ import Multiplication from "./components/Multiplication";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Auth from "./components/Auth";
-import Profile from "./components/Profile"; // ✅ Added Profile Component
+import Profile from "./components/Profile"; 
 import "animate.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -90,7 +90,7 @@ const App = () => {
             <Route path="/multiplication" element={<Multiplication />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
-            <Route path="/profile" element={<Profile user={user} onLogout={handleLogout} />} /> {/* ✅ Profile Page */}
+            <Route path="/profile" element={<Profile user={user} onLogout={handleLogout} />} />
           </Routes>
         </main>
         <Footer />
@@ -100,4 +100,3 @@ const App = () => {
 };
 
 export default App;
-

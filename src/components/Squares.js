@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 
 const Square = () => {
   const [activeTab, setActiveTab] = useState('learning'); // Tabs: 'learning' or 'practice'
