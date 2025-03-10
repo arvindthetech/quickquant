@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 
 const Card = ({ title, link, icon }) => {
@@ -10,11 +10,11 @@ const Card = ({ title, link, icon }) => {
     // Simulate a delay (e.g., API call or navigation)
     setTimeout(() => {
       setLoading(false);
-    }, 1000); // 1-second delay
+    }, 500); // Reduced delay to 0.5 seconds for snappier feel
   };
 
   return (
-    <div className="col-md-4 mb-4">
+    <div className="col-12 col-md-6 col-lg-4 mb-4">
       <div className="card h-100">
         <div className="card-body d-flex justify-content-between align-items-center">
           <div>
@@ -25,12 +25,11 @@ const Card = ({ title, link, icon }) => {
           </div>
           <Link
             to={link}
-            className="btn"
-            style={{ backgroundColor: 'var(--primary-color)', color: '#ffffff' }}
+            className="btn btn-primary" // Use btn-primary for consistent styling
             onClick={handleClick}
           >
             {loading ? (
-              <ClipLoader size={20} color="#ffffff" /> // Loading spinner
+              <ClipLoader size={20} color="#ffffff" />
             ) : (
               'Go'
             )}

@@ -1,234 +1,119 @@
-/* import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/logo1.png";
+import male1 from "../assets/avatar/male1.png"; // Default avatar
 import "./Header.css";
 
-const Header = ({ user, onLogout }) => {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+const Header = ({ user, searchQuery, setSearchQuery, suggestions }) => {
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const searchBarRef = useRef(null);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  // Toggle search bar on mobile
+  const toggleSearch = () => {
+    setIsSearchExpanded(!isSearchExpanded);
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
+  // Close search bar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+        setIsSearchExpanded(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.body.classList.toggle("dark-mode", !isDarkMode);
+    localStorage.setItem("darkMode", !isDarkMode);
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  // Handle search input change
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
+  // Handle suggestion click
+  const handleSuggestionClick = () => {
+    setIsSearchExpanded(false); // Close the search bar
+    setSearchQuery(""); // Clear the search query
   };
 
   return (
     <header className="header">
       <div className="header-container">
-        <div className="header-brand">
+        {/* Logo, Name, and Tagline (Clickable) */}
+        <Link to="/" className="header-brand">
           <img src={logo} alt="App Logo" className="header-logo" />
           <div>
             <h1 className="header-app-name">QuickQuant</h1>
             <p className="header-tagline">Solve Fast. Score Big.</p>
           </div>
-        </div>
+        </Link>
 
-        <nav className={`header-nav-menu ${isMenuOpen ? "open" : ""}`}>
-          <ul className="header-nav-list">
-            <li className="header-nav-item">
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "header-nav-link active" : "header-nav-link")}
-              end
-              onClick={closeMenu}
-            >
-              Home
-            </NavLink>
-            </li>
-            <li
-              className="header-nav-item"
-              onMouseEnter={toggleDropdown}
-              onMouseLeave={closeDropdown}
-            >
-              <span
-                className="header-nav-link"
-                tabIndex="0"
-                aria-haspopup="true"
-                aria-expanded={isDropdownOpen}
-              >
-                Topics
-              </span>
-              <ul
-                className="header-dropdown-menu"
-                style={{ display: isDropdownOpen ? "block" : "none" }}
-              >
-                <li className="header-dropdown-item">
-                  <Link to="/tables" className="header-dropdown-link" onClick={closeMenu}>
-                    Tables
+        {/* Right Section: Search Bar, Dark Mode Toggle, User Authentication */}
+        <div className="header-right-section">
+          {/* Search Bar */}
+          <div
+            className={`search-bar ${isSearchExpanded ? "expanded" : ""}`}
+            ref={searchBarRef}
+          >
+            <input
+              type="text"
+              placeholder="Search for Tables, Squares, Alphabet Series..."
+              className="search-input"
+              value={searchQuery}
+              onChange={handleInputChange}
+            />
+            <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={toggleSearch} />
+            {/* Suggestions Dropdown */}
+            {suggestions.length > 0 && (
+              <div className="suggestions-dropdown">
+                {suggestions.map((suggestion, index) => (
+                  <Link
+                    key={index}
+                    to={suggestion.link}
+                    className="suggestion-item"
+                    onClick={handleSuggestionClick}
+                  >
+                    {suggestion.title}
                   </Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/squares" className="header-dropdown-link" onClick={closeMenu}>
-                    Squares
-                  </Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/cubes" className="header-dropdown-link" onClick={closeMenu}>
-                    Cubes
-                  </Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/square-roots" className="header-dropdown-link" onClick={closeMenu}>
-                    Square Roots
-                  </Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/cube-roots" className="header-dropdown-link" onClick={closeMenu}>
-                    Cube Roots
-                  </Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/addition" className="header-dropdown-link" onClick={closeMenu}>
-                    Addition
-                  </Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/subtraction" className="header-dropdown-link" onClick={closeMenu}>
-                    Subtraction
-                  </Link>
-                </li>
-                <li className="header-dropdown-item">
-                  <Link to="/multiplication" className="header-dropdown-link" onClick={closeMenu}>
-                    Multiplication
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li className="header-nav-item">
-              <NavLink to="/about" className="header-nav-link" activeClassName="active" exact onClick={closeMenu}>
-                About
-              </NavLink>
-            </li>
-            <li className="header-nav-item">
-              <NavLink to="/contact" className="header-nav-link" activeClassName="active" exact onClick={closeMenu}>
-                Contact
-              </NavLink>
-            </li>
-          </ul>
-
-          //Display user name and logout button if logged in 
-          {user ? (
-            <div className="header-user">
-              <span className="header-username">{user.name}</span>
-              <button className="header-auth-button" onClick={onLogout}>
-                Logout
-              </button>
-            </div>
-          ) : (
-            <Link to="/auth" className="header-auth-button">
-              Login/Signup
-            </Link>
-          )}
-        </nav>
-
-        <button className="header-hamburger" onClick={toggleMenu} aria-label="Toggle menu">
-          ☰
-        </button>
-      </div>
-    </header>
-  );
-};
-
-export default Header; */
-
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/logo1.png";
-import male1 from "../assets/avatar/male1.png"; // Import default avatar
-import "./Header.css";
-
-const Header = ({ user }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  // Toggle menu
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  // Toggle dropdown
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
-
-  return (
-    <header className="header">
-      <div className="header-container">
-        <div className="header-brand">
-          <img src={logo} alt="App Logo" className="header-logo" />
-          <div>
-            <h1 className="header-app-name">QuickQuant</h1>
-            <p className="header-tagline">Solve Fast. Score Big.</p>
+                ))}
+              </div>
+            )}
           </div>
-        </div>
 
-        <nav className={`header-nav-menu ${isMenuOpen ? "open" : ""}`}>
-          <ul className="header-nav-list">
-            <li className="header-nav-item">
-              <NavLink to="/" className={({ isActive }) => (isActive ? "header-nav-link active" : "header-nav-link")} end onClick={closeMenu}>
-                Home
-              </NavLink>
-            </li>
-            <li className="header-nav-item" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
-              <span className="header-nav-link" tabIndex="0" aria-haspopup="true" aria-expanded={isDropdownOpen}>
-                Topics
-              </span>
-              <ul className="header-dropdown-menu" style={{ display: isDropdownOpen ? "block" : "none" }}>
-                <li className="header-dropdown-item"><Link to="/tables" className="header-dropdown-link" onClick={closeMenu}>Tables</Link></li>
-                <li className="header-dropdown-item"><Link to="/squares" className="header-dropdown-link" onClick={closeMenu}>Squares</Link></li>
-                <li className="header-dropdown-item"><Link to="/cubes" className="header-dropdown-link" onClick={closeMenu}>Cubes</Link></li>
-                <li className="header-dropdown-item"><Link to="/square-roots" className="header-dropdown-link" onClick={closeMenu}>Square Roots</Link></li>
-                <li className="header-dropdown-item"><Link to="/cube-roots" className="header-dropdown-link" onClick={closeMenu}>Cube Roots</Link></li>
-                <li className="header-dropdown-item"><Link to="/addition" className="header-dropdown-link" onClick={closeMenu}>Addition</Link></li>
-                <li className="header-dropdown-item"><Link to="/subtraction" className="header-dropdown-link" onClick={closeMenu}>Subtraction</Link></li>
-                <li className="header-dropdown-item"><Link to="/multiplication" className="header-dropdown-link" onClick={closeMenu}>Multiplication</Link></li>
-              </ul>
-            </li>
-            <li className="header-nav-item"><NavLink to="/about" className="header-nav-link" exact onClick={closeMenu}>About</NavLink></li>
-            <li className="header-nav-item"><NavLink to="/contact" className="header-nav-link" exact onClick={closeMenu}>Contact</NavLink></li>
-          </ul>
+          {/* Dark Mode Toggle */}
+          <button className="dark-mode-toggle" onClick={toggleDarkMode}>
+            <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
+          </button>
 
-          {/* User Profile Section */}
-          <div className="header-user-section header-nav-item">
+          {/* User Authentication */}
+          <div className="header-user-section">
             {user ? (
-              <Link to="/profile" className="header-profile-link" onClick={closeMenu}>
+              <Link to="/profile" className="header-profile-link">
                 <img
-                  src={user.icon || male1} // Use the imported icon directly
+                  src={user.icon || male1}
                   alt="Profile Icon"
                   className="header-profile-icon"
                 />
               </Link>
             ) : (
-              <Link to="/auth" className="header-auth-button" onClick={closeMenu}>
-                Login/Signup
+              <Link to="/auth" className="header-auth-button">
+                Login
               </Link>
             )}
           </div>
-        </nav>
-
-        {/* Hamburger Menu */}
-        <button className="header-hamburger" onClick={toggleMenu} aria-label="Toggle menu">
-          ☰
-        </button>
+        </div>
       </div>
     </header>
   );
