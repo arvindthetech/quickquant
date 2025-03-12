@@ -15,6 +15,7 @@ const ResetPassword = () => {
   useEffect(() => {
     // Extract token from URL
     const tokenFromUrl = searchParams.get("token");
+    console.log("Token extracted from URL:", tokenFromUrl); // Debug log
     setToken(tokenFromUrl);
   }, [searchParams]);
 
@@ -23,6 +24,7 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
+      console.log("Sending reset password request with token:", token); // Debug log
       const response = await axios.post(
         "https://quickquant-backend.onrender.com/api/auth/reset-password",
         { token, newPassword }
