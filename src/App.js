@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
+import { GoogleOAuthProvider } from "@react-oauth/google"; // Import GoogleOAuthProvider
 import "./App.css";
 import Header from "./components/Header";
 import Card from "./components/Card";
@@ -17,6 +18,8 @@ import Contact from "./components/Contact";
 import About from "./components/About";
 import Auth from "./components/Auth";
 import Profile from "./components/Profile";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 import { Tabs, TabPanel } from "./components/Tabs";
 import "animate.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -119,75 +122,79 @@ const App = () => {
   };
 
   return (
-    <BrowserRouter basename="/quickquant">
-      <div className="d-flex flex-column min-vh-100">
-        <Header
-          user={user}
-          searchQuery={searchQuery}
-          setSearchQuery={handleSearch}
-          suggestions={suggestions}
-        />
-        <main className="container flex-grow-1 py-4">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Tabs>
-                  <TabPanel label="Speed-Up Calculation">
-                    <div className="row">
-                      {cards.map((card, index) => (
-                        <Card key={index} title={card.title} link={card.link} icon={card.icon} />
-                      ))}
-                    </div>
-                  </TabPanel>
-                  <TabPanel label="Quantitative Aptitude">
-                    <div className="row">
-                      {quantitativeCards.map((card, index) => (
-                        <Card key={index} title={card.title} link={card.link} icon={card.icon} />
-                      ))}
-                    </div>
-                  </TabPanel>
-                  <TabPanel label="Reasoning">
-                    <div className="row">
-                      {reasoningCards.map((card, index) => (
-                        <Card key={index} title={card.title} link={card.link} icon={card.icon} />
-                      ))}
-                    </div>
-                  </TabPanel>
-                  <TabPanel label="English Comprehension">
-                    <div className="row">
-                      {englishCards.map((card, index) => (
-                        <Card key={index} title={card.title} link={card.link} icon={card.icon} />
-                      ))}
-                    </div>
-                  </TabPanel>
-                  <TabPanel label="General Awareness">
-                    <div className="row">
-                      {generalAwarenessCards.map((card, index) => (
-                        <Card key={index} title={card.title} link={card.link} icon={card.icon} />
-                      ))}
-                    </div>
-                  </TabPanel>
-                </Tabs>
-              }
-            />
-            <Route path="/auth" element={<Auth onAuthSuccess={handleAuthSuccess} />} />
-            <Route path="/tables" element={<Table />} />
-            <Route path="/squares" element={<Squares />} />
-            <Route path="/cubes" element={<Cubes />} />
-            <Route path="/square-roots" element={<SquareRoots />} />
-            <Route path="/cube-roots" element={<CubeRoots />} />
-            <Route path="/addition" element={<Addition />} />
-            <Route path="/subtraction" element={<Subtraction />} />
-            <Route path="/multiplication" element={<Multiplication />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/profile" element={<Profile user={user} onLogout={handleLogout} />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId="634169635881-acs90s27ep4r01p540rbndb801qn76ao.apps.googleusercontent.com"> {/* Wrap with GoogleOAuthProvider */}
+      <BrowserRouter basename="/quickquant">
+        <div className="d-flex flex-column min-vh-100">
+          <Header
+            user={user}
+            searchQuery={searchQuery}
+            setSearchQuery={handleSearch}
+            suggestions={suggestions}
+          />
+          <main className="container flex-grow-1 py-4">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Tabs>
+                    <TabPanel label="Speed-Up Calculation">
+                      <div className="row">
+                        {cards.map((card, index) => (
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                        ))}
+                      </div>
+                    </TabPanel>
+                    <TabPanel label="Quantitative Aptitude">
+                      <div className="row">
+                        {quantitativeCards.map((card, index) => (
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                        ))}
+                      </div>
+                    </TabPanel>
+                    <TabPanel label="Reasoning">
+                      <div className="row">
+                        {reasoningCards.map((card, index) => (
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                        ))}
+                      </div>
+                    </TabPanel>
+                    <TabPanel label="English Comprehension">
+                      <div className="row">
+                        {englishCards.map((card, index) => (
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                        ))}
+                      </div>
+                    </TabPanel>
+                    <TabPanel label="General Awareness">
+                      <div className="row">
+                        {generalAwarenessCards.map((card, index) => (
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                        ))}
+                      </div>
+                    </TabPanel>
+                  </Tabs>
+                }
+              />
+              <Route path="/auth" element={<Auth onAuthSuccess={handleAuthSuccess} />} />
+              <Route path="/tables" element={<Table />} />
+              <Route path="/squares" element={<Squares />} />
+              <Route path="/cubes" element={<Cubes />} />
+              <Route path="/square-roots" element={<SquareRoots />} />
+              <Route path="/cube-roots" element={<CubeRoots />} />
+              <Route path="/addition" element={<Addition />} />
+              <Route path="/subtraction" element={<Subtraction />} />
+              <Route path="/multiplication" element={<Multiplication />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/profile" element={<Profile user={user} onLogout={handleLogout} />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 };
 
