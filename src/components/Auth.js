@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Eye, EyeOff } from "lucide-react"; // For show/hide password toggle
-import { GoogleLogin } from "@react-oauth/google"; // For Google social login
-import { toast, ToastContainer } from "react-toastify"; // For success/error messages
+import { Eye, EyeOff } from "lucide-react"; // Show/hide password toggle
+import { GoogleLogin } from "@react-oauth/google"; // Google login
+import { toast, ToastContainer } from "react-toastify"; // Toast notifications
 import "react-toastify/dist/ReactToastify.css"; // Toastify CSS
 import "./Auth.css";
 
@@ -22,9 +22,9 @@ const Auth = ({ onAuthSuccess }) => {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const navigate = useNavigate();
 
-  // Toggle between login and signup modes
+  // Toggle login/signup mode
   const toggleAuthMode = () => {
-    setIsLogin(!isLogin);
+    setIsLogin((prev) => !prev);
     setError("");
     setName("");
     setEmail("");
@@ -39,10 +39,22 @@ const Auth = ({ onAuthSuccess }) => {
     e.preventDefault();
 
     // Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    if (!isLogin && password.length < 8) {
+      setError("Password must be at least 8 characters long");
+      return;
+    }
+
     if (!isLogin && password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
+
     if (!isLogin && !agreeToTerms) {
       setError("You must agree to the terms and conditions");
       return;
@@ -63,12 +75,16 @@ const Auth = ({ onAuthSuccess }) => {
       const response = await axios.post(url, payload);
       const { token } = response.data;
 
-      onAuthSuccess(token);
+      if (typeof onAuthSuccess === "function") {
+        onAuthSuccess(token);
+      }
+
       toast.success(isLogin ? "Login successful!" : "Signup successful!");
-      navigate("/");
+      setTimeout(() => navigate("/"), 500);
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
-      toast.error(err.response?.data?.message || "Something went wrong");
+      const errorMessage = err.response?.data?.message || "Something went wrong";
+      setError(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -77,19 +93,23 @@ const Auth = ({ onAuthSuccess }) => {
   // Handle Google login success
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      // Send the credential to your backend for verification
       const response = await axios.post(
         "https://quickquant-backend.onrender.com/api/auth/google",
         { credential: credentialResponse.credential }
       );
-      const { token } = response.data;
 
-      onAuthSuccess(token);
-      toast.success("Google login successful!");
-      navigate("/");
+      const { token, user } = response.data;
+
+      if (typeof onAuthSuccess === "function") {
+        onAuthSuccess(token, user);
+      }
+
+      toast.success(`Welcome, ${user.name}!`);
+      setTimeout(() => navigate("/"), 500);
     } catch (err) {
-      setError(err.response?.data?.message || "Google login failed");
-      toast.error(err.response?.data?.message || "Google login failed");
+      const errorMessage = err.response?.data?.message || "Google login failed";
+      setError(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
@@ -150,7 +170,7 @@ const Auth = ({ onAuthSuccess }) => {
               <button
                 type="button"
                 className="password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -223,10 +243,7 @@ const Auth = ({ onAuthSuccess }) => {
         </form>
 
         <div className="social-login">
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleFailure}
-          />
+          <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleFailure} />
         </div>
 
         <p className="auth-toggle-text">
