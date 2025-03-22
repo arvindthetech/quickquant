@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Play, Flag, RotateCcw } from 'lucide-react';
 
 const Addition = () => {
@@ -163,6 +163,7 @@ const Addition = () => {
                   className="form-control"
                   value={difficulty}
                   onChange={(e) => setDifficulty(e.target.value)}
+                  style={styles.select}
                 >
                   <option value="level1">Level 1 (Single-Digit Addition)</option>
                   <option value="level2">Level 2 (Two-Digit Addition)</option>
@@ -171,7 +172,7 @@ const Addition = () => {
                   <option value="level5">Level 5 (Mixed Questions)</option>
                 </select>
               </div>
-              <button className="btn btn-success" onClick={startQuiz}>
+              <button className="btn btn-success" style={styles.button} onClick={startQuiz}>
                 <Play size={18} className="me-2" /> Start Quiz
               </button>
             </div>
@@ -191,6 +192,7 @@ const Addition = () => {
                             : 'btn-danger'
                           : 'btn-outline-secondary'
                       }`}
+                      style={styles.optionButton}
                       onClick={() => handleAnswerSelection(option)}
                       disabled={selectedOption !== null}
                     >
@@ -200,24 +202,24 @@ const Addition = () => {
                 ))}
               </div>
               <div className="d-flex justify-content-center gap-3 mt-3">
-                <button className="btn btn-danger d-flex align-items-center gap-2" onClick={endQuiz}>
+                <button className="btn btn-danger d-flex align-items-center gap-2" style={styles.button} onClick={endQuiz}>
                   <Flag size={18} /> End Quiz
                 </button>
-                <button className="btn btn-secondary d-flex align-items-center gap-2" onClick={resetDifficulty}>
+                <button className="btn btn-secondary d-flex align-items-center gap-2" style={styles.button} onClick={resetDifficulty}>
                   <RotateCcw size={18} /> Change Difficulty
                 </button>
               </div>
             </div>
           ) : (
             <div>
-              <h3>🎉 Quiz Completed!</h3>
+              <h3 style={styles.quizEndHeading}> Quiz Completed!</h3>
               <div className="mt-3" style={styles.score}>⏱️ Time Taken: {timeLeft} seconds</div>
               <div className="mt-3" style={styles.score}>✅ Correct: {score.correct} | ❌ Incorrect: {score.incorrect}</div>
               <div className="d-flex justify-content-center gap-3 mt-3">
-                <button className="btn btn-primary d-flex align-items-center gap-2" onClick={startQuiz}>
+                <button className="btn btn-primary d-flex align-items-center gap-2" style={styles.button} onClick={startQuiz}>
                   <RotateCcw size={18} /> Restart Quiz
                 </button>
-                <button className="btn btn-secondary d-flex align-items-center gap-2" onClick={resetDifficulty}>
+                <button className="btn btn-secondary d-flex align-items-center gap-2" style={styles.button} onClick={resetDifficulty}>
                   <RotateCcw size={18} /> Change Difficulty
                 </button>
               </div>
@@ -231,22 +233,56 @@ const Addition = () => {
 
 const styles = {
   page: {
-    background: 'linear-gradient(90deg, #F3F4F6,rgb(248, 225, 207),rgb(255, 197, 150))',
+    background: '#ffffff', // White background
     minHeight: '100vh',
     padding: '20px',
+    border: '4px solid #000000', // Thick black border
+    boxShadow: '8px 8px 0px #000000', // Bold shadow
   },
   heading: {
-    color: '#1e3a8a',
+    color: '#000000', // Black text
     fontWeight: '700',
+    fontSize: '2rem',
+  },
+  select: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+  },
+  button: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px 20px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+    boxShadow: '4px 4px 0px #000000', // Bold shadow
+    transition: 'transform 0.3s ease',
+  },
+  optionButton: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px 20px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+    boxShadow: '4px 4px 0px #000000', // Bold shadow
+    transition: 'transform 0.3s ease',
   },
   question: {
     fontSize: '24px',
-    color: '#004d40',
-    fontWeight: '600',
+    color: '#000000', // Black text
+    fontWeight: '700', // Bold text
+  },
+  quizEndHeading: {
+    fontSize: '2rem',
+    color: '#000000', // Black text
+    fontWeight: '700', // Bold text
   },
   score: {
-    fontSize: '18px',
-    color: '#004d40',
+    fontSize: '1.25rem',
+    color: '#000000', // Black text
+    fontWeight: '700', // Bold text
   },
 };
 

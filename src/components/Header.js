@@ -6,9 +6,8 @@ import logo from "../assets/logo1.png";
 import male1 from "../assets/avatar/male1.png"; // Default avatar
 import "./Header.css";
 
-const Header = ({ user, searchQuery, setSearchQuery, suggestions }) => {
+const Header = ({ user, searchQuery, setSearchQuery, suggestions, darkMode, toggleDarkMode }) => {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const searchBarRef = useRef(null);
 
   // Toggle search bar on mobile
@@ -30,13 +29,6 @@ const Header = ({ user, searchQuery, setSearchQuery, suggestions }) => {
     };
   }, []);
 
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.body.classList.toggle("dark-mode", !isDarkMode);
-    localStorage.setItem("darkMode", !isDarkMode);
-  };
-
   // Handle search input change
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -49,7 +41,7 @@ const Header = ({ user, searchQuery, setSearchQuery, suggestions }) => {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${darkMode ? "dark-mode" : ""}`}>
       <div className="header-container">
         {/* Logo, Name, and Tagline (Clickable) */}
         <Link to="/" className="header-brand">
@@ -74,7 +66,12 @@ const Header = ({ user, searchQuery, setSearchQuery, suggestions }) => {
               value={searchQuery}
               onChange={handleInputChange}
             />
-            <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={toggleSearch} />
+            <FontAwesomeIcon
+              icon={faSearch}
+              className="search-icon"
+              onClick={toggleSearch}
+              aria-label="Search"
+            />
             {/* Suggestions Dropdown */}
             {suggestions.length > 0 && (
               <div className="suggestions-dropdown">
@@ -93,8 +90,8 @@ const Header = ({ user, searchQuery, setSearchQuery, suggestions }) => {
           </div>
 
           {/* Dark Mode Toggle */}
-          <button className="dark-mode-toggle" onClick={toggleDarkMode}>
-            <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
+          <button className="dark-mode-toggle" onClick={toggleDarkMode} aria-label="Toggle Dark Mode">
+            <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
           </button>
 
           {/* User Authentication */}

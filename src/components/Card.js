@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 
@@ -36,6 +36,49 @@ const Card = ({ title, link, icon }) => {
           </Link>
         </div>
       </div>
+    </div>
+  );
+};
+
+export default Card; */
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
+
+const Card = ({ title, link, icon, darkMode }) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = () => {
+    setLoading(true);
+    // Simulate a delay (e.g., API call or navigation)
+    setTimeout(() => {
+      setLoading(false);
+    }, 500); // Reduced delay to 0.5 seconds for snappier feel
+  };
+
+  return (
+    <div className="col-6 col-md-4 col-lg-3 mb-4"> {/* Adjusted for 2 cards per row on mobile */}
+      <Link
+        to={link}
+        className={`card h-100 ${darkMode ? 'dark-mode' : ''}`}
+        onClick={handleClick}
+        style={{ textDecoration: 'none', color: 'inherit' }} // Remove default link styling
+      >
+        <div className="card-body d-flex flex-column justify-content-center align-items-center">
+          <div className="text-center">
+            <span className="material-icons" style={{ fontSize: '2rem', marginBottom: '10px' }}>
+              {icon}
+            </span>
+            <h5 className="card-title mb-0">{title}</h5>
+          </div>
+          {loading && (
+            <div className="mt-3">
+              <ClipLoader size={20} color={darkMode ? '#ffffff' : '#000000'} />
+            </div>
+          )}
+        </div>
+      </Link>
     </div>
   );
 };

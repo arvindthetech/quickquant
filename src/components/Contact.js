@@ -31,10 +31,10 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-page" style={styles.page}>
+    <div className="contact-page">
       <div className="container mt-4">
-        <h2 className="text-center mb-4" style={styles.heading}> Contact Us </h2>
-        <div className="text-center mb-4" style={styles.message}>
+        <h2 className="text-center mb-4"> Contact Us </h2>
+        <div className="text-center mb-4">
           <p>
             Hello, amazing learners! We’re thrilled that you’re using QuickQuant to master your skills. 
             Whether you have feedback, questions, or suggestions to improve the app, we’d love to hear from you. 
@@ -114,21 +114,21 @@ const Contact = () => {
 
         {/* Contact Information */}
         <div className="text-center mt-5">
-          <h3 style={styles.subHeading}> Contact Information</h3>
-          <p style={styles.contactInfo}>
+          <h3> Contact Information</h3>
+          <p>
             <Mail size={20} className="me-2" /> support@quickquant.com
           </p>
           <div className="social-links mt-3">
-            <a href="https://www.facebook.com/arvindthetech" aria-label="Facebook" style={styles.socialLink}>
+            <a href="https://www.facebook.com/arvindthetech" aria-label="Facebook">
               <Facebook size={24} />
             </a>
-            <a href="https://twitter.com/arvindthetech" aria-label="Twitter" style={styles.socialLink}>
+            <a href="https://twitter.com/arvindthetech" aria-label="Twitter">
               <Twitter size={24} />
             </a>
-            <a href="https://www.instagram.com/arvindthetech/" aria-label="Instagram" style={styles.socialLink}>
+            <a href="https://www.instagram.com/arvindthetech/" aria-label="Instagram">
               <Instagram size={24} />
             </a>
-            <a href="https://www.linkedin.com/in/arvindthetech/" aria-label="LinkedIn" style={styles.socialLink}>
+            <a href="https://www.linkedin.com/in/arvindthetech/" aria-label="LinkedIn">
               <Linkedin size={24} />
             </a>
           </div>
@@ -136,41 +136,6 @@ const Contact = () => {
       </div>
     </div>
   );
-};
-
-// Styles
-const styles = {
-  page: {
-    background: 'linear-gradient(135deg, #f5f7fa, #c3cfe2)',
-    minHeight: '100vh',
-    padding: '20px',
-  },
-  heading: {
-    color: '#1E3A8A', // Deep Blue
-    fontWeight: '700',
-  },
-  message: {
-    fontSize: '18px',
-    color: '#1F2937', // Dark Gray
-    lineHeight: '1.6',
-  },
-  subHeading: {
-    color: '#1E3A8A', // Deep Blue
-    fontWeight: '600',
-    marginBottom: '20px',
-  },
-  contactInfo: {
-    fontSize: '18px',
-    color: '#1F2937', // Dark Gray
-  },
-  socialLink: {
-    color: '#1E3A8A', // Deep Blue
-    margin: '0 10px',
-    transition: 'color 0.3s ease',
-  },
-  socialLinkHover: {
-    color: '#F97316', // Bright Orange
-  },
 };
 
 export default Contact;

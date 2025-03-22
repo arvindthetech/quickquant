@@ -1,11 +1,12 @@
-/* Profile Section */
+/* Profile.css - Neo-brutalism Style */
 .profile-section {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* White background */
+  border: 4px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
+  box-shadow: 8px 8px 0px #000000; /* Bold shadow */
 }
 
 /* Profile Header */
@@ -22,19 +23,22 @@
 .profile-icon {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border: 4px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
   object-fit: cover;
+  box-shadow: 4px 4px 0px #000000; /* Bold shadow */
 }
 
 .profile-name {
   margin: 10px 0 5px;
   font-size: 24px;
-  color: #1f2937;
+  font-weight: 700; /* Bold text */
+  color: #000000; /* Black text */
 }
 
 .profile-username {
   margin: 0;
-  color: #6b7280;
+  color: #555555; /* Dark gray text */
 }
 
 /* Profile Info */
@@ -49,12 +53,13 @@
 .profile-field strong {
   display: block;
   margin-bottom: 5px;
-  color: #1f2937;
+  font-weight: 700; /* Bold text */
+  color: #000000; /* Black text */
 }
 
 .profile-field span {
   cursor: pointer;
-  color: #374151;
+  color: #000000; /* Black text */
 }
 
 /* Preferences */
@@ -88,8 +93,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #d1d5db;
-  border-radius: 20px;
+  background-color: #d1d5db; /* Light gray */
+  border: 2px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
   cursor: pointer;
   transition: 0.4s;
 }
@@ -101,13 +107,14 @@
   width: 16px;
   left: 2px;
   bottom: 2px;
-  background-color: #fff;
-  border-radius: 50%;
+  background-color: #ffffff; /* White background */
+  border: 2px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #f97316;
+  background-color: #ff6b6b; /* Bright red */
 }
 
 input:checked + .slider:before {
@@ -126,29 +133,33 @@ input:checked + .slider:before {
 .profile-logout {
   flex: 1;
   padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+  border: 4px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease;
+  font-weight: 700; /* Bold text */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 4px 4px 0px #000000; /* Bold shadow */
 }
 
 .profile-edit-button {
-  background-color: #f97316;
-  color: #fff;
+  background-color: #ff6b6b; /* Bright red */
+  color: #ffffff; /* White text */
 }
 
 .profile-edit-button:hover {
-  background-color: #fb923c;
+  background-color: #ff9f9f; /* Lighter red on hover */
+  transform: translateY(-2px);
 }
 
 .profile-logout {
-  background-color: #dc2626;
-  color: #fff;
+  background-color: #000000; /* Black background */
+  color: #ffffff; /* White text */
 }
 
 .profile-logout:hover {
-  background-color: #ef4444;
+  background-color: #333333; /* Darker black on hover */
+  transform: translateY(-2px);
 }
 
 /* Edit Profile Modal */
@@ -165,9 +176,11 @@ input:checked + .slider:before {
 }
 
 .profile-modal-content {
-  background-color: #fff;
+  background-color: #ffffff; /* White background */
   padding: 20px;
-  border-radius: 8px;
+  border: 4px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
+  box-shadow: 8px 8px 0px #000000; /* Bold shadow */
   width: 90%;
   max-width: 500px;
 }
@@ -179,15 +192,26 @@ input:checked + .slider:before {
 .profile-modal-field label {
   display: block;
   margin-bottom: 5px;
-  color: #1f2937;
+  font-weight: 700; /* Bold text */
+  color: #000000; /* Black text */
 }
 
 .profile-modal-field input,
 .profile-modal-field textarea {
   width: 100%;
   padding: 8px;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
+  border: 4px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-modal-field input:focus,
+.profile-modal-field textarea:focus {
+  border-color: #ff6b6b; /* Bright red border on focus */
+  box-shadow: 0 0 8px #ff6b6b; /* Red shadow on focus */
+  outline: none;
 }
 
 .profile-icon-list {
@@ -200,9 +224,9 @@ input:checked + .slider:before {
 .profile-icon-option {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border: 4px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
   cursor: pointer;
-  border: 2px solid transparent;
   transition: opacity 0.3s ease, border-color 0.3s ease;
 }
 
@@ -211,43 +235,48 @@ input:checked + .slider:before {
 }
 
 .profile-icon-option.selected {
-  border-color: #f97316;
+  border-color: #ff6b6b; /* Bright red border */
 }
 
 .profile-save-button,
 .profile-cancel-button {
   padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
+  border: 4px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease;
+  font-weight: 700; /* Bold text */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 4px 4px 0px #000000; /* Bold shadow */
 }
 
 .profile-save-button {
-  background-color: #f97316;
-  color: #fff;
+  background-color: #ff6b6b; /* Bright red */
+  color: #ffffff; /* White text */
   margin-right: 10px;
 }
 
 .profile-save-button:hover {
-  background-color: #fb923c;
+  background-color: #ff9f9f; /* Lighter red on hover */
+  transform: translateY(-2px);
 }
 
 .profile-cancel-button {
-  background-color: #d1d5db;
-  color: #1f2937;
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text */
 }
 
 .profile-cancel-button:hover {
-  background-color: #9ca3af;
+  background-color: #f0f0f0; /* Light gray on hover */
+  transform: translateY(-2px);
 }
 
 /* Header Profile Icon */
 .header-profile-icon {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border: 4px solid #000000; /* Thick black border */
+  border-radius: 0; /* Sharp edges */
   object-fit: cover;
   cursor: pointer;
   transition: opacity 0.3s ease;

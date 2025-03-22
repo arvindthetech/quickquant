@@ -242,6 +242,12 @@ const Auth = ({ onAuthSuccess }) => {
           </button>
         </form>
 
+        <div class="relative flex py-3 items-center">
+          <div class="flex-grow border-t border-gray-400"></div>
+            <span class="flex-shrink mx-4 text-gray-400">or</span>
+          <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+
         <div className="social-login">
           <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleFailure} />
         </div>

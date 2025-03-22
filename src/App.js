@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
-import { GoogleOAuthProvider } from "@react-oauth/google"; // Import GoogleOAuthProvider
+import { GoogleOAuthProvider } from "@react-oauth/google";
+//import { Play, Flag, RotateCcw, Moon, Sun } from "lucide-react"; // Lucide icons
 import "./App.css";
 import Header from "./components/Header";
 import Card from "./components/Card";
@@ -28,6 +29,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [darkMode, setDarkMode] = useState(false); // Dark mode state
 
   useEffect(() => {
     fetchUserDetails();
@@ -56,6 +58,11 @@ const App = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle("dark-mode", !darkMode);
   };
 
   const cards = [
@@ -97,7 +104,6 @@ const App = () => {
     { title: "Science", link: "/science", icon: "science" },
   ];
 
-  // Combine all cards for search functionality
   const allCards = [
     ...cards,
     ...quantitativeCards,
@@ -106,7 +112,6 @@ const App = () => {
     ...generalAwarenessCards,
   ];
 
-  // Filter suggestions based on search query
   const handleSearch = (query) => {
     setSearchQuery(query);
     if (query.length >= 1) {
@@ -122,14 +127,16 @@ const App = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="634169635881-acs90s27ep4r01p540rbndb801qn76ao.apps.googleusercontent.com"> {/* Wrap with GoogleOAuthProvider */}
+    <GoogleOAuthProvider clientId="634169635881-acs90s27ep4r01p540rbndb801qn76ao.apps.googleusercontent.com">
       <BrowserRouter basename="/quickquant">
-        <div className="d-flex flex-column min-vh-100">
+        <div className={`App ${darkMode ? "dark-mode" : ""}`}>
           <Header
             user={user}
             searchQuery={searchQuery}
             setSearchQuery={handleSearch}
             suggestions={suggestions}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
           />
           <main className="container flex-grow-1 py-4">
             <Routes>
@@ -140,35 +147,35 @@ const App = () => {
                     <TabPanel label="Speed-Up Calculation">
                       <div className="row">
                         {cards.map((card, index) => (
-                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} darkMode={darkMode} />
                         ))}
                       </div>
                     </TabPanel>
                     <TabPanel label="Quantitative Aptitude">
                       <div className="row">
                         {quantitativeCards.map((card, index) => (
-                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} darkMode={darkMode} />
                         ))}
                       </div>
                     </TabPanel>
                     <TabPanel label="Reasoning">
                       <div className="row">
                         {reasoningCards.map((card, index) => (
-                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} darkMode={darkMode} />
                         ))}
                       </div>
                     </TabPanel>
                     <TabPanel label="English Comprehension">
                       <div className="row">
                         {englishCards.map((card, index) => (
-                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} darkMode={darkMode} />
                         ))}
                       </div>
                     </TabPanel>
                     <TabPanel label="General Awareness">
                       <div className="row">
                         {generalAwarenessCards.map((card, index) => (
-                          <Card key={index} title={card.title} link={card.link} icon={card.icon} />
+                          <Card key={index} title={card.title} link={card.link} icon={card.icon} darkMode={darkMode} />
                         ))}
                       </div>
                     </TabPanel>
@@ -176,22 +183,22 @@ const App = () => {
                 }
               />
               <Route path="/auth" element={<Auth onAuthSuccess={handleAuthSuccess} />} />
-              <Route path="/tables" element={<Table />} />
-              <Route path="/squares" element={<Squares />} />
-              <Route path="/cubes" element={<Cubes />} />
-              <Route path="/square-roots" element={<SquareRoots />} />
-              <Route path="/cube-roots" element={<CubeRoots />} />
-              <Route path="/addition" element={<Addition />} />
-              <Route path="/subtraction" element={<Subtraction />} />
-              <Route path="/multiplication" element={<Multiplication />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/profile" element={<Profile user={user} onLogout={handleLogout} />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/tables" element={<Table darkMode={darkMode} />} />
+              <Route path="/squares" element={<Squares darkMode={darkMode} />} />
+              <Route path="/cubes" element={<Cubes darkMode={darkMode} />} />
+              <Route path="/square-roots" element={<SquareRoots darkMode={darkMode} />} />
+              <Route path="/cube-roots" element={<CubeRoots darkMode={darkMode} />} />
+              <Route path="/addition" element={<Addition darkMode={darkMode} />} />
+              <Route path="/subtraction" element={<Subtraction darkMode={darkMode} />} />
+              <Route path="/multiplication" element={<Multiplication darkMode={darkMode} />} />
+              <Route path="/contact" element={<Contact darkMode={darkMode} />} />
+              <Route path="/about" element={<About darkMode={darkMode} />} />
+              <Route path="/profile" element={<Profile user={user} onLogout={handleLogout} darkMode={darkMode} />} />
+              <Route path="/forgot-password" element={<ForgotPassword darkMode={darkMode} />} />
+              <Route path="/reset-password" element={<ResetPassword darkMode={darkMode} />} />
             </Routes>
           </main>
-          <Footer />
+          <Footer darkMode={darkMode} />
         </div>
       </BrowserRouter>
     </GoogleOAuthProvider>

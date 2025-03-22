@@ -1,76 +1,45 @@
-/* App.css */
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* New Styles with Unified Color Scheme */
+/* App.css - Neo-brutalism Style */
 :root {
   --primary-color: #1E3A8A; /* Deep Blue */
   --accent-color: #F97316; /* Bright Orange */
   --background-color: #F3F4F6; /* Light Gray */
   --text-color: #1F2937; /* Dark Gray */
+  --border-color: #000000; /* Black */
   --button-hover-color: #FB923C; /* Lighter Orange */
+}
+
+.dark-mode {
+  --primary-color: #4ECDC4; /* Bright Teal */
+  --accent-color: #FF6B6B; /* Bright Red */
+  --background-color: #1E1E1E; /* Dark Background */
+  --text-color: #FFFFFF; /* White Text */
+  --border-color: #FFFFFF; /* White Border */
+  --button-hover-color: #FF9F9F; /* Lighter Red */
+}
+
+.App {
+  text-align: center;
+  background-color: var(--background-color);
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Card Styles */
 .card {
-  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 4px solid var(--border-color);
+  border-radius: 0; /* Sharp edges */
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--background-color);
+  box-shadow: 8px 8px 0px var(--border-color);
+  margin: 10px;
+  cursor: pointer; /* Indicate the card is clickable */
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: var(--background-color); /* Light gray background on hover */
-}
-
-.card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-color); /* Dark Gray */
-}
-
-.card-text {
-  font-size: 1rem;
-  color: var(--text-color); /* Dark Gray */
+  box-shadow: 12px 12px 0px var(--border-color);
+  background-color: var(--button-hover-color);
 }
 
 .card:active {
@@ -80,57 +49,106 @@
 .card-body {
   padding: 1.5rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700; /* Bold text */
+  color: var(--text-color);
+  margin-bottom: 0; /* Remove default margin */
 }
 
 .material-icons {
-  font-size: 28px; /* Slightly larger icons */
-  color: var(--accent-color); /* Bright Orange */
-  margin-right: 10px;
+  font-size: 2rem; /* Larger icons */
+  color: var(--primary-color); /* Accent color for icons */
+  margin-bottom: 10px; /* Space between icon and title */
 }
 
 /* Button Styles */
 .btn-primary {
-  background-color: var(--primary-color); /* Deep Blue */
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: background-color 0.2s;
-  color: white; /* White text for better contrast */
-}
-
-.btn-primary .material-icons {
-  font-size: 18px;
-  vertical-align: middle;
+  background-color: var(--primary-color);
+  border: 4px solid var(--border-color);
+  padding: 10px 20px;
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 700;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: var(--text-color);
+  box-shadow: 4px 4px 0px var(--border-color);
 }
 
 .btn-primary:hover {
-  background-color: var(--button-hover-color); /* Lighter Orange on hover */
-}
-
-/* Add a subtle animation for the Go button */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0px var(--border-color);
 }
 
 .btn-primary:active {
-  animation: pulse 0.3s ease-in-out; /* Pulse animation on click */
+  transform: translateY(2px);
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  background-color: var(--primary-color);
+  border: 4px solid var(--border-color);
+  padding: 10px;
+  border-radius: 0;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px var(--border-color);
+}
+
+.dark-mode-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0px var(--border-color);
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .col-md-4 {
-    flex: 0 0 100%;
-    max-width: 100%;
+  .card {
+    margin: 5px; /* Reduce margin for smaller screens */
   }
+
+  .card-title {
+    font-size: 1rem; /* Smaller font size for mobile */
+  }
+
+  .material-icons {
+    font-size: 1.5rem; /* Smaller icons for mobile */
+  }
+
+  .col-md-4 {
+    flex: 0 0 50%; /* Two cards per row on mobile */
+    max-width: 50%;
+  }
+}
+
+/* Dark Mode */
+.dark-mode .card {
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  box-shadow: 8px 8px 0px var(--border-color);
+}
+
+.dark-mode .card:hover {
+  background-color: var(--button-hover-color);
+}
+
+.dark-mode .card-title {
+  color: var(--text-color);
+}
+
+.dark-mode .material-icons {
+  color: var(--accent-color); /* Accent color for icons in dark mode */
 }

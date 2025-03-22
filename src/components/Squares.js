@@ -1,4 +1,5 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
+import { Play, Flag, RotateCcw } from 'lucide-react';
 
 const Square = () => {
   const [activeTab, setActiveTab] = useState('learning'); // Tabs: 'learning' or 'practice'
@@ -121,12 +122,14 @@ const Square = () => {
         <div className="text-center mb-4">
           <button
             className={`btn ${activeTab === 'learning' ? 'btn-primary' : 'btn-outline-primary'} me-2`}
+            style={styles.tabButton}
             onClick={() => setActiveTab('learning')}
           >
             📘 Learning Mode
           </button>
           <button
             className={`btn ${activeTab === 'practice' ? 'btn-primary' : 'btn-outline-primary'}`}
+            style={styles.tabButton}
             onClick={() => setActiveTab('practice')}
           >
             🎯 Practice Mode
@@ -145,6 +148,7 @@ const Square = () => {
                     type="number"
                     id="startRange"
                     className="form-control"
+                    style={styles.input}
                     value={range.start}
                     min="1"
                     max="100"
@@ -159,6 +163,7 @@ const Square = () => {
                     type="number"
                     id="endRange"
                     className="form-control"
+                    style={styles.input}
                     value={range.end}
                     min="1"
                     max="100"
@@ -170,7 +175,7 @@ const Square = () => {
             <div className="row">
               {generateSquares().map((square) => (
                 <div key={square.number} className="col-md-4 mb-4">
-                  <div className="card h-100 shadow">
+                  <div className="card h-100" style={styles.card}>
                     <div className="card-body text-center">
                       <h5 className="card-title">{square.number}² = {square.square}</h5>
                     </div>
@@ -190,6 +195,7 @@ const Square = () => {
                   <select
                     id="difficulty"
                     className="form-control"
+                    style={styles.select}
                     value={difficulty}
                     onChange={(e) => setDifficulty(e.target.value)}
                   >
@@ -198,8 +204,8 @@ const Square = () => {
                     <option value="hard">Hard (1-40 with operations)</option>
                   </select>
                 </div>
-                <button className="btn btn-success" onClick={startQuiz}>
-                  ▶️ Start Quiz
+                <button className="btn btn-success" style={styles.button} onClick={startQuiz}>
+                  <Play size={18} className="me-2" /> Start Quiz
                 </button>
               </div>
             ) : isQuizActive ? (
@@ -221,6 +227,7 @@ const Square = () => {
                               : 'btn-danger'
                             : 'btn-outline-secondary'
                         }`}
+                        style={styles.optionButton}
                         onClick={() => handleAnswerSelection(option)}
                         disabled={selectedOption !== null}
                       >
@@ -230,25 +237,25 @@ const Square = () => {
                   ))}
                 </div>
                 <div className="d-flex justify-content-center gap-3 mt-3">
-                  <button className="btn btn-danger d-flex align-items-center gap-2" onClick={endQuiz}>
-                    🚩 End Quiz
+                  <button className="btn btn-danger d-flex align-items-center gap-2" style={styles.button} onClick={endQuiz}>
+                    <Flag size={18} /> End Quiz
                   </button>
-                  <button className="btn btn-secondary d-flex align-items-center gap-2" onClick={changeRange}>
-                    🔄 Change Range
+                  <button className="btn btn-secondary d-flex align-items-center gap-2" style={styles.button} onClick={changeRange}>
+                    <RotateCcw size={18} /> Change Range
                   </button>
                 </div>
               </div>
             ) : (
               <div>
-                <h3>🎉 Quiz Completed!</h3>
+                <h3 style={styles.quizEndHeading}>🎉 Quiz Completed!</h3>
                 <div className="mt-3" style={styles.score}>⏱️ Time Taken: {timeLeft} seconds</div>
                 <div className="mt-3" style={styles.score}>✅ Correct: {score.correct} | ❌ Incorrect: {score.incorrect}</div>
                 <div className="d-flex justify-content-center gap-3 mt-3">
-                  <button className="btn btn-primary d-flex align-items-center gap-2" onClick={startQuiz}>
-                    🔄 Restart Quiz
+                  <button className="btn btn-primary d-flex align-items-center gap-2" style={styles.button} onClick={startQuiz}>
+                    <RotateCcw size={18} /> Restart Quiz
                   </button>
-                  <button className="btn btn-secondary d-flex align-items-center gap-2" onClick={changeRange}>
-                    🎛️ Change Range
+                  <button className="btn btn-secondary d-flex align-items-center gap-2" style={styles.button} onClick={changeRange}>
+                    <RotateCcw size={18} /> Change Range
                   </button>
                 </div>
               </div>
@@ -260,25 +267,79 @@ const Square = () => {
   );
 };
 
-// Styles
 const styles = {
   page: {
-    background: 'linear-gradient(90deg, #F3F4F6,rgb(248, 225, 207),rgb(255, 197, 150))',
+    background: '#ffffff', // White background
     minHeight: '100vh',
     padding: '20px',
+    border: '4px solid #000000', // Thick black border
+    boxShadow: '8px 8px 0px #000000', // Bold shadow
   },
   heading: {
-    color: '#1e3a8a',
+    color: '#000000', // Black text
     fontWeight: '700',
+    fontSize: '2rem',
+  },
+  tabButton: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px 20px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+    boxShadow: '4px 4px 0px #000000', // Bold shadow
+    transition: 'transform 0.3s ease',
+  },
+  input: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+  },
+  select: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+  },
+  button: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px 20px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+    boxShadow: '4px 4px 0px #000000', // Bold shadow
+    transition: 'transform 0.3s ease',
+  },
+  optionButton: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px 20px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+    boxShadow: '4px 4px 0px #000000', // Bold shadow
+    transition: 'transform 0.3s ease',
+  },
+  card: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    boxShadow: '4px 4px 0px #000000', // Bold shadow
   },
   question: {
     fontSize: '24px',
-    color: '#1F2937', // Dark Gray
-    fontWeight: '600',
+    color: '#000000', // Black text
+    fontWeight: '700', // Bold text
+  },
+  quizEndHeading: {
+    fontSize: '2rem',
+    color: '#000000', // Black text
+    fontWeight: '700', // Bold text
   },
   score: {
-    fontSize: '18px',
-    color: '#1F2937', // Dark Gray
+    fontSize: '1.25rem',
+    color: '#000000', // Black text
+    fontWeight: '700', // Bold text
   },
 };
 

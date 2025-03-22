@@ -3,9 +3,9 @@ import logo from '../assets/logo1.png';
 import { Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import './Footer.css';
 
-const Footer = () => {
+const Footer = ({ darkMode }) => {
   return (
-    <footer className="footer">
+    <footer className={`footer ${darkMode ? 'dark-mode' : ''}`}>
       <div className="footer-container">
         {/* First Section: Logo, Name, Tagline, Copyright */}
         <div className="footer-section">
@@ -41,17 +41,17 @@ const Footer = () => {
           <a href="/quickquant/about">About</a>
           <a href="/quickquant/contact">Contact</a>
         </div>
-      </div> 
+      </div>
 
       {/* Fourth Section: Contact and Social Media Links */}
       <div className="footer-bottom">
         <div className="footer-section">
           <h3>Contact Us</h3>
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="footer-contact">
             <Phone size={20} />
             <span>+91 1234567890</span>
           </div>
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>
+          <div className="footer-contact">
             <Mail size={20} />
             <span>support@quickquant.com</span>
           </div>

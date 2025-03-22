@@ -1,49 +1,90 @@
+/* Tabs.css - Neo-brutalism Style */
 .tabs {
-    width: 100%;
-  }
-  
-  .tab-headers {
-    display: flex;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on touch devices */
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .tab-header {
-    padding: 10px 20px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom 0.3s ease;
-    white-space: nowrap; /* Prevent wrapping */
-  }
-  
-  .tab-header.active {
-    border-bottom: 2px solid var(--accent-color);
-    font-weight: bold;
-  }
-  
-  .tab-content {
-    padding: 20px;
-    position: relative;
-    min-height: 200px;
-  }
-  
-  .fade-enter {
-    opacity: 0;
-  }
-  
-  .fade-enter-active {
-    opacity: 1;
-    transition: opacity 300ms ease-in-out;
-  }
-  
-  .fade-exit {
-    opacity: 1;
-  }
-  
-  .fade-exit-active {
-    opacity: 0;
-    transition: opacity 300ms ease-in-out;
-  }
+  width: 100%;
+}
+
+.tab-headers {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on touch devices */
+  border-bottom: 4px solid #000000; /* Thick black border */
+  margin-bottom: 20px;
+}
+
+.tab-header {
+  padding: 10px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-bottom: 4px solid transparent; /* Thick transparent border */
+  transition: border-bottom 0.3s ease, color 0.3s ease;
+  white-space: nowrap; /* Prevent wrapping */
+  font-size: 16px;
+  font-weight: 700; /* Bold text */
+  color: #000000; /* Black text */
+}
+
+.tab-header.active {
+  border-bottom: 4px solid #ff6b6b; /* Bright red border */
+  color: #ff6b6b; /* Bright red text */
+}
+
+.tab-header:hover {
+  color: #ff6b6b; /* Bright red text on hover */
+}
+
+.tab-content {
+  padding: 20px;
+  position: relative;
+  min-height: 200px;
+  border: 4px solid #000000; /* Thick black border */
+  background-color: #ffffff; /* White background */
+  box-shadow: 8px 8px 0px #000000; /* Bold shadow */
+}
+
+/* Dark Mode Styles */
+.dark-mode .tabs {
+  background-color: #1f2937; /* Dark gray background */
+}
+
+.dark-mode .tab-headers {
+  border-bottom: 4px solid #ffffff; /* Thick white border */
+}
+
+.dark-mode .tab-header {
+  color: #ffffff; /* White text */
+}
+
+.dark-mode .tab-header.active {
+  border-bottom: 4px solid #ff6b6b; /* Bright red border */
+  color: #ff6b6b; /* Bright red text */
+}
+
+.dark-mode .tab-header:hover {
+  color: #ff6b6b; /* Bright red text on hover */
+}
+
+.dark-mode .tab-content {
+  border: 4px solid #ffffff; /* Thick white border */
+  background-color: #1f2937; /* Dark gray background */
+  box-shadow: 8px 8px 0px #ffffff; /* Bold white shadow */
+}
+
+/* Animation Styles */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
