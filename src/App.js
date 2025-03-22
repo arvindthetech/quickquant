@@ -22,6 +22,8 @@ import Profile from "./components/Profile";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import { Tabs, TabPanel } from "./components/Tabs";
+
+import NumberSystem from './components/quantitativecards/NumberSystem';
 import "animate.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -77,10 +79,40 @@ const App = () => {
   ];
 
   const quantitativeCards = [
-    { title: "Percentage", link: "/percentage", icon: "percent" },
-    { title: "Ratio & Proportion", link: "/ratio", icon: "linear_scale" },
-    { title: "Profit & Loss", link: "/profit", icon: "attach_money" },
-    { title: "Time & Work", link: "/time-work", icon: "timer" },
+    { title: "Number System", link: "/quantitativecards/number-system", icon: "123" },
+    { title: "Power, Indices & Surds", link: "/quantitativecards/power-indices", icon: "superscript" },
+    { title: "Simplification", link: "/quantitativecards/simplification", icon: "calculate" },
+    { title: "Algebra", link: "/quantitativecards/algebra", icon: "speed_1_2x" },
+    { title: "Quadratic Equation", link: "/quantitativecards/quadratic-equation", icon: "science" },
+    { title: "LCM HCF", link: "/quantitativecards/lcm-hcf", icon: "ruler" },
+    { title: "Percentage", link: "/quantitativecards/percentage", icon: "percent" },
+    { title: "Profit & Loss", link: "/quantitativecards/profit", icon: "trending_up" },
+    { title: "Discount", link: "/quantitativecards/discount", icon: "sell" },
+    { title: "Simple Interest", link: "/quantitativecards/simple-interest", icon: "attach_money" },
+    { title: "Compound Interest", link: "/quantitativecards/compound-interest", icon: "monetization_on" },
+    { title: "Ratio & Proportion", link: "/quantitativecards/ratio", icon: "compare_arrows" },
+    { title: "Age", link: "/quantitativecards/age", icon: "hourglass_empty" },
+    { title: "Partnership", link: "/quantitativecards/partnership", icon: "group" },
+    { title: "Mixture & Alligation", link: "/quantitativecards/mixture", icon: "filter_alt" },
+    { title: "Time & Work", link: "/quantitativecards/time-work", icon: "timer" },
+    { title: "Work and Wages", link: "/quantitativecards/work-wages", icon: "payments" },
+    { title: "Pipes & Cistern", link: "/quantitativecards/pipes-cistern", icon: "water_drop" },
+    { title: "Time & Distance", link: "/quantitativecards/time-distance", icon: "directions" },
+    { title: "Race", link: "/quantitativecards/race", icon: "flag" },
+    { title: "Average", link: "/quantitativecards/average", icon: "assessment" },
+    { title: "Average Speed", link: "/quantitativecards/average-speed", icon: "speed" },
+    { title: "Boat & Stream", link: "/quantitativecards/boat-stream", icon: "directions_boat" },
+    { title: "Trigonometry", link: "/quantitativecards/trigonometry", icon: "change_history" },
+    { title: "Circular Measurement of Angle", link: "/quantitativecards/circular-measur", icon: "settings_ethernet" },
+    { title: "Mximum and Minimum", link: "/quantitativecards/mximum-minimum", icon: "trending_down" },
+    { title: "Height & Distance", link: "/quantitativecards/height-distance", icon: "signal_cellular_alt" },
+    { title: "Co-ordinate Geometry", link: "/quantitativecards/co-ordinate-geometry", icon: "scatter_plot" },
+    { title: "Geometry", link: "/quantitativecards/geometry", icon: "hexagon" },
+    { title: "Mensuration-2D", link: "/quantitativecards/mensuration-2d", icon: "crop_square" },
+    { title: "Mensuration-3D", link: "/quantitativecards/mensuration-2d", icon: "deployed_code" },
+    { title: "Probability", link: "/quantitativecards/probability", icon: "casino" },
+    { title: "Data Interpretation", link: "/quantitativecards/data-interpretation", icon: "analytics" },
+    { title: "Statistics", link: "/quantitativecards/statistics", icon: "bar_chart" },
   ];
 
   const reasoningCards = [
@@ -196,6 +228,7 @@ const App = () => {
               <Route path="/profile" element={<Profile user={user} onLogout={handleLogout} darkMode={darkMode} />} />
               <Route path="/forgot-password" element={<ForgotPassword darkMode={darkMode} />} />
               <Route path="/reset-password" element={<ResetPassword darkMode={darkMode} />} />
+              <Route path="/quantitativecards/number-system" element={<NumberSystem darkMode={darkMode} />} />
             </Routes>
           </main>
           <Footer darkMode={darkMode} />

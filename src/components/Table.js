@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Play, Flag, RotateCcw } from 'lucide-react';
+import './Table.css';
 
 const Table = () => {
   const [activeTab, setActiveTab] = useState('learning'); // Tabs: 'learning' or 'practice'
@@ -282,6 +283,13 @@ const styles = {
     color: '#000000', // Black text
   },
   input: {
+    border: '4px solid #000000', // Thick black border
+    borderRadius: '0', // Sharp edges
+    padding: '10px',
+    fontSize: '1rem',
+    fontWeight: '700', // Bold text
+  },
+  select: {
     border: '4px solid #000000', // Thick black border
     borderRadius: '0', // Sharp edges
     padding: '10px',

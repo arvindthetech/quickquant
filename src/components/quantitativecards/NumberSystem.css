@@ -1,0 +1,27 @@
+/* NumberSystem.css */
+.number-system-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f0f0; /* Light background */
+  }
+  
+  .blinking-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000000; /* Black text */
+    animation: blink 1.5s infinite; /* Blinking animation */
+  }
+  
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
