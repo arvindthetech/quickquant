@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/quickquant/static/css/main.33e1d4fd.css",
-    "main.js": "/quickquant/static/js/main.cf4b9f17.js",
+    "main.css": "/quickquant/static/css/main.dc3e333c.css",
+    "main.js": "/quickquant/static/js/main.515f0c6f.js",
     "static/js/453.93dfaea1.chunk.js": "/quickquant/static/js/453.93dfaea1.chunk.js",
     "static/media/logo1.png": "/quickquant/static/media/logo1.7f837e917d5f028cccac.png",
     "static/media/Arvind.jpg": "/quickquant/static/media/Arvind.0ca98162e6e7aeb5a742.jpg",
@@ -12,12 +12,12 @@
     "static/media/female1.png": "/quickquant/static/media/female1.77efe45f9ba236deae99.png",
     "static/media/female2.png": "/quickquant/static/media/female2.d2b262e1441a3d121e1b.png",
     "index.html": "/quickquant/index.html",
-    "main.33e1d4fd.css.map": "/quickquant/static/css/main.33e1d4fd.css.map",
-    "main.cf4b9f17.js.map": "/quickquant/static/js/main.cf4b9f17.js.map",
+    "main.dc3e333c.css.map": "/quickquant/static/css/main.dc3e333c.css.map",
+    "main.515f0c6f.js.map": "/quickquant/static/js/main.515f0c6f.js.map",
     "453.93dfaea1.chunk.js.map": "/quickquant/static/js/453.93dfaea1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.33e1d4fd.css",
-    "static/js/main.cf4b9f17.js"
+    "static/css/main.dc3e333c.css",
+    "static/js/main.515f0c6f.js"
   ]
 }
