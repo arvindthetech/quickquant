@@ -10,24 +10,62 @@ const Contact = () => {
     message: '',
     suggestion: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false); // To disable button during submission
+  const [submissionError, setSubmissionError] = useState(''); // To display error messages
+  const [submissionSuccess, setSubmissionSuccess] = useState(false); // To indicate successful submission
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setSubmissionError(''); // Clear any previous error on input change
+    setSubmissionSuccess(false); // Reset success message on input change
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logic here (e.g., send data to backend)
-    console.log('Form Data:', formData);
-    alert('Thank you for contacting us! We will get back to you soon.');
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-      suggestion: '',
-    });
+    setIsSubmitting(true);
+    setSubmissionError('');
+    setSubmissionSuccess(false);
+
+    try {
+      // Determine the correct API endpoint based on the environment
+      const apiUrl = process.env.NODE_ENV === 'production'
+        ? 'https://quickquant-backend.onrender.com/api/contact'
+        : 'http://localhost:5000/api/contact';
+      
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      setIsSubmitting(false);
+
+      if (response.ok) {
+        setSubmissionSuccess(true);
+        alert('Thank you for contacting us! We will get back to you soon.');
+        // Reset the form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+          suggestion: '',
+        });
+      } else {
+        const errorData = await response.json();
+        console.error('Contact form submission failed:', errorData);
+        setSubmissionError(errorData.message || 'Something went wrong. Please try again later.');
+        alert(errorData.message || 'Something went wrong. Please try again later.');
+      }
+    } catch (error) {
+      setIsSubmitting(false);
+      console.error('Error submitting form:', error);
+      setSubmissionError('Failed to connect to the server. Please try again later.');
+      alert('Failed to connect to the server. Please try again later.');
+    }
   };
 
   return (
@@ -36,8 +74,8 @@ const Contact = () => {
         <h2 className="text-center mb-4"> Contact Us </h2>
         <div className="text-center mb-4">
           <p>
-            Hello, amazing learners! We’re thrilled that you’re using QuickQuant to master your skills. 
-            Whether you have feedback, questions, or suggestions to improve the app, we’d love to hear from you. 
+            Hello, amazing learners! We’re thrilled that you’re using QuickQuant to master your skills.
+            Whether you have feedback, questions, or suggestions to improve the app, we’d love to hear from you.
             Your input helps us make QuickQuant even better for everyone. Feel free to reach out—we’re here to help!
           </p>
         </div>
@@ -105,9 +143,11 @@ const Contact = () => {
                   onChange={handleChange}
                 />
               </div>
-              <button type="submit" className="btn btn-primary w-100">
-                 Send Message
+              <button type="submit" className="btn btn-primary w-100" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
+              {submissionError && <div className="mt-2 text-danger">{submissionError}</div>}
+              {submissionSuccess && <div className="mt-2 text-success">Message sent successfully!</div>}
             </form>
           </div>
         </div>
